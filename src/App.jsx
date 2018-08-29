@@ -10,27 +10,7 @@ class App extends Component {
     selectedCategory: null,
   };
 
-  navigateCategory = (categoryID) => {
-    const { allNotes } = this.state;
-
-    const newCategory = this.findCategory(categoryID, allNotes);
-    this.setState({ selectedCategory: newCategory });
-    console.log(newCategory);
-  };
-
-  // findCategory = (id, object) => {
-  //   let temp;
-  //   if (object.id === id) {
-  //       return object;
-  //   }
-  //   object.categories.some(o => temp = findCategory(o, id));
-  //   return temp;
-  // }
-
   findCategory = (categoryID, notesCategory) => {
-    // debugger; // eslint-disable-line
-    console.log('function call');
-    console.log(notesCategory);
     if (notesCategory.categoryID === categoryID) {
       return notesCategory;
     }
@@ -41,6 +21,13 @@ class App extends Component {
     }
 
     return null;
+  };
+
+  navigateCategory = (categoryID) => {
+    const { allNotes } = this.state;
+
+    const newCategory = this.findCategory(categoryID, allNotes);
+    this.setState({ selectedCategory: newCategory });
   };
 
   render() {

@@ -1,5 +1,6 @@
 {
   "categoryName":"Home",
+  "categoryID":0,
   "notes":[
     {
       "id":0,
@@ -20,6 +21,7 @@
   "categories":[
     {
       "categoryName":"School",
+      "categoryID":1,
       "notes":[
         {
           "id":0,
@@ -35,6 +37,7 @@
       "categories":[
         {
           "categoryName":"Web development",
+          "categoryID":2,
           "notes":[
             {
               "id":0,
@@ -48,11 +51,30 @@
             }
           ],
           "categories":[
-
+            {
+              "categoryName":"Front-end",
+              "categoryID":5,
+              "notes":[
+                {
+                  "id":0,
+                  "title":"Front-end Note 1",
+                  "text":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio tempora officiis sed quis nostrum fugiat ea. Dicta neque beatae molestiae! "
+                },
+                {
+                  "id":1,
+                  "title":"Front-end Note 2",
+                  "text":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio tempora officiis sed quis nostrum fugiat ea. Dicta neque beatae molestiae! "
+                }
+              ],
+              "categories":[
+                
+              ]
+            }
           ]
         },
         {
           "categoryName":"Mobile App Development",
+          "categoryID":3,
           "notes":[
             {
               "id":0,
@@ -71,6 +93,7 @@
         },
         {
           "categoryName":"Database",
+          "categoryID":4,
           "notes":[
             {
               "id":0,

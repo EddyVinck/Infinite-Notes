@@ -1,15 +1,18 @@
 import React from 'react';
-import { arrayOf } from 'prop-types';
+import { arrayOf, func } from 'prop-types';
 import category from './types';
 
 const Categories = (props) => {
-  const { categories } = props;
-  console.log(categories);
+  const { categories, navigateCategory } = props;
   return (
     <div className="categories">
       <h2>Categories:</h2>
       {categories.map((cat) => (
-        <button key={cat.categoryName} type="button">
+        <button
+          onClick={() => navigateCategory(cat.categoryID)}
+          key={cat.categoryName}
+          type="button"
+        >
           {cat.categoryName}
         </button>
       ))}
@@ -17,6 +20,9 @@ const Categories = (props) => {
   );
 };
 
-Categories.propTypes = { categories: arrayOf(category).isRequired };
+Categories.propTypes = {
+  categories: arrayOf(category).isRequired,
+  navigateCategory: func.isRequired,
+};
 
 export default Categories;

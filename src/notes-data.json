@@ -1,0 +1,93 @@
+{
+  "categoryName":"Home",
+  "notes":[
+    {
+      "id":0,
+      "title":"add more notes",
+      "text":"I should probably add some new notes.."
+    },
+    {
+      "id":1,
+      "title":"Continue with Infinite Notes app",
+      "text":"After finishing the Complete Intro to React v3 course by Brian Holt on Frontend Masters I should probably make an app by myself to practice.\n \n Practice makes perfect, as they say."
+    },
+    {
+      "id":2,
+      "title":"React JS",
+      "text":"A JavaScript library for building user interfaces\n \n React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes."
+    }
+  ],
+  "categories":[
+    {
+      "categoryName":"School",
+      "notes":[
+        {
+          "id":0,
+          "title":"School Note 1",
+          "text":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio tempora officiis sed quis nostrum fugiat ea. Dicta neque beatae molestiae! "
+        },
+        {
+          "id":1,
+          "title":"School Note 2",
+          "text":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio tempora officiis sed quis nostrum fugiat ea. Dicta neque beatae molestiae! "
+        }
+      ],
+      "categories":[
+        {
+          "categoryName":"Web development",
+          "notes":[
+            {
+              "id":0,
+              "title":"Web development Note 1",
+              "text":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio tempora officiis sed quis nostrum fugiat ea. Dicta neque beatae molestiae! "
+            },
+            {
+              "id":1,
+              "title":"Web development Note 2",
+              "text":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio tempora officiis sed quis nostrum fugiat ea. Dicta neque beatae molestiae! "
+            }
+          ],
+          "categories":[
+
+          ]
+        },
+        {
+          "categoryName":"Mobile App Development",
+          "notes":[
+            {
+              "id":0,
+              "title":"Mobile App Development Note 1",
+              "text":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio tempora officiis sed quis nostrum fugiat ea. Dicta neque beatae molestiae! "
+            },
+            {
+              "id":1,
+              "title":"Mobile App Development Note 2",
+              "text":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio tempora officiis sed quis nostrum fugiat ea. Dicta neque beatae molestiae! "
+            }
+          ],
+          "categories":[
+
+          ]
+        },
+        {
+          "categoryName":"Database",
+          "notes":[
+            {
+              "id":0,
+              "title":"Database Note 1",
+              "text":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio tempora officiis sed quis nostrum fugiat ea. Dicta neque beatae molestiae! "
+            },
+            {
+              "id":1,
+              "title":"Database Note 2",
+              "text":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio tempora officiis sed quis nostrum fugiat ea. Dicta neque beatae molestiae! "
+            }
+          ],
+          "categories":[
+
+          ]
+        }
+      ]
+    }
+  ]
+}

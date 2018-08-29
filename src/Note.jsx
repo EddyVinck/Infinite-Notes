@@ -5,6 +5,8 @@ const Note = (props) => {
   const { note, handleDeleteNote } = props;
   return (
     <div className="note">
+      <h2>{note.title}</h2>
+      <p>{note.text}</p>
       <button
         onClick={() => {
           handleDeleteNote(note.id);
@@ -13,8 +15,6 @@ const Note = (props) => {
       >
         Delete
       </button>
-      <h2>{note.title}</h2>
-      <p>{note.text}</p>
     </div>
   );
 };

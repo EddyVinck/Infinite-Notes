@@ -1,52 +1,35 @@
 /* eslint-disable no-console */
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Note from './Note';
+import Categories from './Categories';
+
+import category from './types';
 
 class Notes extends Component {
-  state = {
-    notes: [
-      {
-        id: 0,
-        title: 'note 1',
-        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, expedita.',
-      },
-      {
-        id: 1,
-        title: 'note 2',
-        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, expedita.',
-      },
-    ],
-  };
-
   componentDidUpdate() {
     // update db if the notes have changed
     // or maybe do this on a note basis instead of overwriting the entire notes in the database
   }
 
-  handleDeleteNote = (noteID) => {
-    const { notes } = this.state;
-
-    // copy the array
-    const newNotes = notes.slice();
-
-    // delete one note
-    const noteToDelete = newNotes.findIndex((note) => note.id === noteID);
-    const deleteCount = 1;
-    newNotes.splice(noteToDelete, deleteCount);
-
-    this.setState({ notes: newNotes });
-  };
+  handleDeleteNote = () => {};
 
   render() {
-    const { notes } = this.state;
+    const { notes } = this.props;
+    console.log(notes);
     return (
-      <div className="Notes">
-        {notes.map((note) => (
-          <Note key={note.id} note={note} handleDeleteNote={this.handleDeleteNote} />
-        ))}
-      </div>
+      <Fragment>
+        <Categories categories={notes.categories} />
+        <h2>Notes for {notes.categoryName} category</h2>
+        <div className="Notes">
+          {notes.notes.map((note) => (
+            <Note key={note.id} note={note} handleDeleteNote={this.handleDeleteNote} />
+          ))}
+        </div>
+      </Fragment>
     );
   }
 }
+
+Notes.propTypes = { notes: category.isRequired };
 
 export default Notes;

@@ -28,6 +28,8 @@ class App extends Component {
     this.setState({ selectedCategory: newCategory });
   };
 
+  addNote = () => {};
+
   render() {
     const { allNotes, selectedCategory } = this.state;
     const notesToView = selectedCategory !== null ? selectedCategory : allNotes;
@@ -35,7 +37,11 @@ class App extends Component {
     return (
       <div>
         <h1>Infinite Notes!</h1>
-        <Notes notes={notesToView} navigateCategory={this.navigateCategory} />
+        <Notes
+          notes={notesToView}
+          navigateCategory={this.navigateCategory}
+          addNote={this.addNote}
+        />
       </div>
     );
   }

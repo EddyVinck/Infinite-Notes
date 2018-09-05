@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react';
 import { func } from 'prop-types';
 import Note from './Note';
 import Categories from './Categories';
+import AddNotes from './AddNote';
 
 import category from './types';
 
@@ -17,6 +18,7 @@ class Notes extends Component {
       <Fragment>
         <Categories categories={notes.categories} navigateCategory={navigateCategory} />
         <h2>Notes for {notes.categoryName} category:</h2>
+        <AddNotes availableCategories={notes.categories} />
         <div className="Notes">
           {notes.notes.map((note) => (
             <Note key={note.id} note={note} handleDeleteNote={this.handleDeleteNote} />

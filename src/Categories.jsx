@@ -7,6 +7,9 @@ const Categories = (props) => {
   return (
     <div className="categories">
       <h2>Categories:</h2>
+      <button type="button" onClick={() => navigateCategory(null)}>
+        Home
+      </button>
       {categories.map((cat) => (
         <button
           onClick={() => navigateCategory(cat.categoryID)}

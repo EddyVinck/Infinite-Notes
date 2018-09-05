@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import React, { Component } from 'react';
 import Notes from './Notes';
 import notes from './notes-data';

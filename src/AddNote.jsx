@@ -43,12 +43,8 @@ class AddNote extends Component {
       <div className="add-notes">
         <h3>Add a note</h3>
         <form onSubmit={this.handleSubmit} action="">
-          {/* eslint-disable-next-line jsx-a11y/label-has-for */}
           <label htmlFor="category">
             Category:
-            {/* onChange is causing the following: 
-                Warning: A component is changing a controlled input of type text to be uncontrolled. 
-            */}
             <select name="category" onChange={this.handleCategoryChange}>
               {availableCategories.map((cat) => (
                 <option key={cat.categoryID} value={cat.categoryID}>
@@ -67,7 +63,6 @@ class AddNote extends Component {
               onChange={this.handleInputChange}
             />
           </label>
-          {/* eslint-disable-next-line jsx-a11y/label-has-for */}
           <label htmlFor="myText">
             Text:
             <textarea

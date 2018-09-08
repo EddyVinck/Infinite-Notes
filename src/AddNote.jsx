@@ -16,14 +16,9 @@ class AddNote extends Component {
     const { selectedIndex } = event.target.options;
     const { innerText } = event.target.options[selectedIndex];
 
-    // Still not keeping the text in the note preview for some reason
-    this.setState({ newNote: Object.assign({}, this.state.newNote, { categoryName: innerText }) }); // eslint-disable-line
-
-    this.setState({
-      newNote: {
-        categoryName: innerText,
-      },
-    });
+    this.setState((prevState) => ({
+      newNote: Object.assign({}, prevState.newNote, { categoryName: innerText }),
+    }));
   };
 
   handleInputChange = (event) => {
@@ -31,7 +26,9 @@ class AddNote extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const { name } = target;
 
-    this.setState({ newNote: Object.assign({}, this.state.newNote, { [name]: value }) }); // eslint-disable-line
+    this.setState((prevState) => ({
+      newNote: Object.assign({}, prevState.newNote, { [name]: value }),
+    }));
   };
 
   handleSubmit() {
@@ -52,7 +49,7 @@ class AddNote extends Component {
             {/* onChange is causing the following: 
                 Warning: A component is changing a controlled input of type text to be uncontrolled. 
             */}
-            <select value={newNote.categoryID} name="category" onChange={this.handleCategoryChange}>
+            <select name="category" onChange={this.handleCategoryChange}>
               {availableCategories.map((cat) => (
                 <option key={cat.categoryID} value={cat.categoryID}>
                   {cat.categoryName}

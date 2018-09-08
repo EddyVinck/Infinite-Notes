@@ -33,7 +33,9 @@ class AddNote extends Component {
 
   handleSubmit() {
     const { addNote } = this.props;
-    addNote();
+    const { newNote } = this.state;
+
+    addNote(newNote);
   }
 
   render() {
@@ -42,10 +44,11 @@ class AddNote extends Component {
     return (
       <div className="add-notes">
         <h3>Add a note</h3>
+
         <form onSubmit={this.handleSubmit} action="">
           <label htmlFor="category">
             Category:
-            <select name="category" onChange={this.handleCategoryChange}>
+            <select id="category" name="category" onChange={this.handleCategoryChange}>
               {availableCategories.map((cat) => (
                 <option key={cat.categoryID} value={cat.categoryID}>
                   {cat.categoryName}
@@ -53,6 +56,7 @@ class AddNote extends Component {
               ))}
             </select>
           </label>
+
           <label htmlFor="title">
             Title:
             <input
@@ -63,27 +67,28 @@ class AddNote extends Component {
               onChange={this.handleInputChange}
             />
           </label>
+
           <label htmlFor="myText">
             Text:
             <textarea
-              name="text"
-              id="text"
-              value={newNote.text}
               type="text"
+              id="text"
+              name="text"
+              value={newNote.text}
               onChange={this.handleInputChange}
             />
           </label>
 
           <button type="submit">Submit</button>
         </form>
-        {newNote.categoryName !== '' ? (
+        {newNote.title !== '' || newNote.text !== '' ? (
           <div>
-            <h3>Your new note for the {newNote.categoryName} category like:</h3>
-            <h4>{newNote.title}</h4>
+            <h3>Your new note preview:</h3>
+            <h4>Title: {newNote.title}</h4>
             <p>{newNote.text}</p>
           </div>
         ) : (
-          <p>Select a category to preview a new note.</p>
+          <p>Start writing to preview a new note.</p>
         )}
       </div>
     );

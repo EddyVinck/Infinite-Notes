@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { arrayOf, func } from 'prop-types';
-import category from './types';
+import { shape, arrayOf, func, string, number } from 'prop-types';
+// import category from './types';
 
 class AddNote extends Component {
   state = {
@@ -96,7 +96,12 @@ class AddNote extends Component {
 }
 
 AddNote.propTypes = {
-  availableCategories: arrayOf(category).isRequired,
+  availableCategories: arrayOf(
+    shape({
+      categoryID: number,
+      categoryName: string,
+    })
+  ).isRequired,
   addNote: func.isRequired,
 };
 

@@ -28,7 +28,9 @@ class App extends Component {
     this.setState({ selectedCategory: newCategory });
   };
 
-  addNote = () => {};
+  addNote = (newNote) => {
+    console.log(newNote); // eslint-disable-line
+  };
 
   render() {
     const { allNotes, selectedCategory } = this.state;

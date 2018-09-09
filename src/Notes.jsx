@@ -7,8 +7,6 @@ import AddNotes from './AddNote';
 import category from './types';
 
 class Notes extends Component {
-  componentDidUpdate() {}
-
   handleDeleteNote = () => {};
 
   render() {
@@ -23,6 +21,7 @@ class Notes extends Component {
         categoryName: cat.categoryName,
       })),
     ];
+
     return (
       <Fragment>
         <Categories categories={notes.categories} navigateCategory={navigateCategory} />

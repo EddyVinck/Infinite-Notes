@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { shape, arrayOf, func, string, number } from 'prop-types';
-// import category from './types';
 
 class AddNote extends Component {
   state = {
@@ -10,15 +9,6 @@ class AddNote extends Component {
       title: '',
       text: '',
     },
-  };
-
-  handleCategoryChange = (event) => {
-    const { selectedIndex } = event.target.options;
-    const { innerText } = event.target.options[selectedIndex];
-
-    this.setState((prevState) => ({
-      newNote: Object.assign({}, prevState.newNote, { categoryName: innerText }),
-    }));
   };
 
   handleInputChange = (event) => {
@@ -31,12 +21,27 @@ class AddNote extends Component {
     }));
   };
 
-  handleSubmit() {
+  handleSubmit = (event) => {
+    event.preventDefault();
     const { addNote } = this.props;
-    const { newNote } = this.state;
+    const { selectedIndex } = this.categorySelect.options;
+    const { value, innerText } = this.categorySelect.options[selectedIndex];
 
-    addNote(newNote);
-  }
+    this.setState((prevState) => {
+      const newNote = Object.assign({}, prevState.newNote, {
+        categoryID: value,
+        categoryName: innerText,
+      });
+      addNote(newNote);
+      return {
+        newNote,
+      };
+    });
+  };
+
+  setCategorySelectRef = (element) => {
+    this.categorySelect = element;
+  };
 
   render() {
     const { newNote } = this.state;
@@ -48,7 +53,7 @@ class AddNote extends Component {
         <form onSubmit={this.handleSubmit} action="">
           <label htmlFor="category">
             Category:
-            <select id="category" name="category" onChange={this.handleCategoryChange}>
+            <select id="category" name="category" ref={this.setCategorySelectRef}>
               {availableCategories.map((cat) => (
                 <option key={cat.categoryID} value={cat.categoryID}>
                   {cat.categoryName}

@@ -6,8 +6,9 @@ class AddNote extends Component {
     newNote: {
       categoryID: '',
       categoryName: '',
-      title: '',
-      text: '',
+      title: 'title',
+      text:
+        'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat accusantium nesciunt atque necessitatibus, magni est eum eos quaerat voluptatem iure?',
     },
   };
 
@@ -29,7 +30,7 @@ class AddNote extends Component {
 
     this.setState((prevState) => {
       const newNote = Object.assign({}, prevState.newNote, {
-        categoryID: value,
+        categoryID: Number(value),
         categoryName: innerText,
       });
       addNote(newNote);

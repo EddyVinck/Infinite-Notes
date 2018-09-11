@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import _ from 'lodash';
 import Notes from './Notes';
 import notes from './notes-data';
 
@@ -29,7 +30,25 @@ class App extends Component {
   };
 
   addNote = (newNote) => {
-    console.log(newNote); // eslint-disable-line
+    const { allNotes } = this.state;
+    const category = this.findCategory(newNote.categoryID, allNotes);
+
+    const highestNoteID = category.notes
+      .map((note) => note.id)
+      .reduce((highestID, currentNote) => Math.max(currentNote, highestID));
+
+    const pushedNote = { id: highestNoteID + 1, title: newNote.title, text: newNote.text };
+
+    this.setState((prevState) => {
+      const prevNotes = prevState.allNotes;
+      const modifiedNotesCategory = this.findCategory(newNote.categoryID, prevNotes);
+      // This works because modifiedNotes is a reference
+      modifiedNotesCategory.notes.push(pushedNote);
+
+      return prevState;
+    });
+
+    // this.navigateCategory(newNote.categoryID);
   };
 
   render() {

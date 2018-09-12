@@ -54,6 +54,38 @@ class App extends Component {
     });
   };
 
+  addCategory = (categoryName, parentCategory) => {
+    console.log('add category'); // eslint-disable-line
+    const { allNotes } = this.state;
+    const allCategories = [];
+    this.getCategories(allNotes, allCategories);
+
+    const highestCategoryNumber = this.findHighestCategoryNumber(allCategories);
+
+    console.log(categoryName, parentCategory); // eslint-disable-line
+    console.log(allCategories); // eslint-disable-line
+    console.log(highestCategoryNumber); // eslint-disable-line
+  };
+
+  // Let the call stack take care of the recursion since you don't know when the function will be finished
+  getCategories = (cat, allCategories) => {
+    if (cat && typeof cat.categoryID === 'number') {
+      allCategories.push(cat);
+      if (cat.categories && cat.categories.length > 0) {
+        cat.categories.forEach((subCategory) => {
+          this.getCategories(subCategory, allCategories);
+        });
+      }
+    }
+  };
+
+  findHighestCategoryNumber = (allCategories) =>
+    allCategories
+      .map((cat) => cat.categoryID)
+      .reduce(
+        (accumulator, currentValue) => (currentValue > accumulator ? currentValue : accumulator)
+      );
+
   render() {
     const { allNotes, selectedCategory } = this.state;
     const notesToView = selectedCategory !== null ? selectedCategory : allNotes;
@@ -65,6 +97,7 @@ class App extends Component {
           notes={notesToView}
           navigateCategory={this.navigateCategory}
           addNote={this.addNote}
+          addCategory={this.addCategory}
         />
       </div>
     );

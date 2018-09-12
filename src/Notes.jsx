@@ -10,7 +10,7 @@ class Notes extends Component {
   handleDeleteNote = () => {};
 
   render() {
-    const { notes, navigateCategory, addNote } = this.props;
+    const { notes, navigateCategory, addNote, addCategory } = this.props;
     const availableCategories = [
       {
         categoryID: notes.categoryID,
@@ -24,7 +24,11 @@ class Notes extends Component {
 
     return (
       <Fragment>
-        <Categories categories={notes.categories} navigateCategory={navigateCategory} />
+        <Categories
+          currentCategory={notes}
+          navigateCategory={navigateCategory}
+          addCategory={addCategory}
+        />
         <h2>Notes for {notes.categoryName} category:</h2>
         <AddNotes addNote={addNote} availableCategories={availableCategories} />
         <div className="Notes">
@@ -41,6 +45,7 @@ Notes.propTypes = {
   notes: category.isRequired,
   navigateCategory: func.isRequired,
   addNote: func.isRequired,
+  addCategory: func.isRequired,
 };
 
 export default Notes;

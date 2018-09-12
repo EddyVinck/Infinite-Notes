@@ -1,27 +1,32 @@
 import React from 'react';
-import { arrayOf, func } from 'prop-types';
+import { func } from 'prop-types';
 import category from './types';
+import AddCategory from './AddCategory';
 
 const Categories = (props) => {
-  const { categories, navigateCategory } = props;
+  const { navigateCategory, currentCategory, addCategory } = props;
+  // const categories = { currentCategory };
+  // console.log('categories', categories);
   return (
     <div className="categories">
       <h2>Categories:</h2>
       <button type="button" onClick={() => navigateCategory(null)}>
         Home
       </button>
-      {categories.map((cat) => (
+      {currentCategory.categories.map((cat) => (
         <button onClick={() => navigateCategory(cat)} key={cat.categoryName} type="button">
           {cat.categoryName}
         </button>
       ))}
+      <AddCategory addCategory={addCategory} currentCategory={currentCategory} />
     </div>
   );
 };
 
 Categories.propTypes = {
-  categories: arrayOf(category).isRequired,
+  currentCategory: category.isRequired,
   navigateCategory: func.isRequired,
+  addCategory: func.isRequired,
 };
 
 export default Categories;

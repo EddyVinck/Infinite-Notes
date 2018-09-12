@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import _ from 'lodash';
+import _ from 'lodash';
 import Notes from './Notes';
 import notes from './notes-data';
 
@@ -22,11 +22,17 @@ class App extends Component {
     return null;
   };
 
-  navigateCategory = (categoryID) => {
+  navigateCategory = (cat) => {
     const { allNotes } = this.state;
+    let selectedCategory = null;
 
-    const newCategory = this.findCategory(categoryID, allNotes);
-    this.setState({ selectedCategory: newCategory });
+    if (cat === null) {
+      selectedCategory = allNotes;
+    } else {
+      selectedCategory = this.findCategory(cat.categoryID, allNotes);
+    }
+
+    this.setState({ selectedCategory });
   };
 
   addNote = (newNote) => {
@@ -40,15 +46,12 @@ class App extends Component {
     const pushedNote = { id: highestNoteID + 1, title: newNote.title, text: newNote.text };
 
     this.setState((prevState) => {
-      const prevNotes = prevState.allNotes;
-      const modifiedNotesCategory = this.findCategory(newNote.categoryID, prevNotes);
-      // This works because modifiedNotes is a reference
+      const newNotes = _.cloneDeep(prevState.allNotes);
+      const modifiedNotesCategory = this.findCategory(newNote.categoryID, newNotes);
       modifiedNotesCategory.notes.push(pushedNote);
 
-      return prevState;
+      return { allNotes: newNotes, selectedCategory: modifiedNotesCategory };
     });
-
-    // this.navigateCategory(newNote.categoryID);
   };
 
   render() {

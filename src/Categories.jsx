@@ -11,11 +11,7 @@ const Categories = (props) => {
         Home
       </button>
       {categories.map((cat) => (
-        <button
-          onClick={() => navigateCategory(cat.categoryID)}
-          key={cat.categoryName}
-          type="button"
-        >
+        <button onClick={() => navigateCategory(cat)} key={cat.categoryName} type="button">
           {cat.categoryName}
         </button>
       ))}

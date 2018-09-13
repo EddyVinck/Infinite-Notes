@@ -39,11 +39,17 @@ class App extends Component {
     const { allNotes } = this.state;
     const category = this.findCategory(newNote.categoryID, allNotes);
 
-    const highestNoteID = category.notes
-      .map((note) => note.id)
-      .reduce((highestID, currentNote) => Math.max(currentNote, highestID));
+    let newNoteID;
+    if (category.notes && category.notes.length > 0) {
+      newNoteID =
+        category.notes
+          .map((note) => note.id)
+          .reduce((highestID, currentNote) => Math.max(currentNote, highestID)) + 1;
+    } else {
+      newNoteID = 0;
+    }
 
-    const pushedNote = { id: highestNoteID + 1, title: newNote.title, text: newNote.text };
+    const pushedNote = { id: newNoteID, title: newNote.title, text: newNote.text };
 
     this.setState((prevState) => {
       const newNotes = _.cloneDeep(prevState.allNotes);
@@ -55,16 +61,27 @@ class App extends Component {
   };
 
   addCategory = (categoryName, parentCategory) => {
-    console.log('add category'); // eslint-disable-line
     const { allNotes } = this.state;
     const allCategories = [];
     this.getCategories(allNotes, allCategories);
 
     const highestCategoryNumber = this.findHighestCategoryNumber(allCategories);
 
-    console.log(categoryName, parentCategory); // eslint-disable-line
-    console.log(allCategories); // eslint-disable-line
-    console.log(highestCategoryNumber); // eslint-disable-line
+    const newCategory = {
+      categoryID: highestCategoryNumber + 1,
+      categoryName,
+      categories: [],
+      notes: [],
+    };
+
+    this.setState((prevState) => {
+      const notesCopy = _.cloneDeep(prevState.allNotes);
+      const parentCategoryRef = this.findCategory(parentCategory.categoryID, notesCopy);
+
+      parentCategoryRef.categories.push(newCategory);
+
+      return { allNotes: notesCopy, selectedCategory: parentCategoryRef };
+    });
   };
 
   // Let the call stack take care of the recursion since you don't know when the function will be finished

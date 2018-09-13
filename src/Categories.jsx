@@ -5,8 +5,6 @@ import AddCategory from './AddCategory';
 
 const Categories = (props) => {
   const { navigateCategory, currentCategory, addCategory } = props;
-  // const categories = { currentCategory };
-  // console.log('categories', categories);
   return (
     <div className="categories">
       <h2>Categories:</h2>
@@ -14,7 +12,7 @@ const Categories = (props) => {
         Home
       </button>
       {currentCategory.categories.map((cat) => (
-        <button onClick={() => navigateCategory(cat)} key={cat.categoryName} type="button">
+        <button onClick={() => navigateCategory(cat)} key={cat.categoryID} type="button">
           {cat.categoryName}
         </button>
       ))}

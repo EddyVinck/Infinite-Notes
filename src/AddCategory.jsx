@@ -3,6 +3,12 @@ import { func } from 'prop-types';
 import category from './types';
 
 class AddCategory extends Component {
+  state = {
+    newCategory: {
+      categoryName: '',
+    },
+  };
+
   handleAddCategory = () => {
     const { addCategory } = this.props;
     addCategory();
@@ -11,14 +17,29 @@ class AddCategory extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { addCategory, currentCategory } = this.props;
-    addCategory('my new category name', currentCategory);
+    const { newCategory } = this.state;
+    addCategory(newCategory.categoryName, currentCategory);
+  };
+
+  handleInputChange = (event) => {
+    const { target } = event;
+    this.setState({ newCategory: { categoryName: target.value } });
   };
 
   render() {
+    const { currentCategory } = this.props;
+    const { newCategory } = this.state;
     return (
       <div className="addCategory">
+        <h3>Add a subcategory to {currentCategory.categoryName}:</h3>
         <form onSubmit={this.handleSubmit}>
-          <input type="text" name="" id="" />
+          <input
+            onChange={this.handleInputChange}
+            value={newCategory.categoryName}
+            type="text"
+            name=""
+            id=""
+          />
           <button type="submit">Submit</button>
         </form>
       </div>

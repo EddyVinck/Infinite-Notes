@@ -2,14 +2,14 @@ import React from 'react';
 import { shape, number, string, func } from 'prop-types';
 
 const Note = (props) => {
-  const { note, handleDeleteNote } = props;
+  const { note, deleteNote } = props;
   return (
     <div className="note">
       <h2>{note.title}</h2>
       <p>{note.text}</p>
       <button
         onClick={() => {
-          handleDeleteNote(note.id);
+          deleteNote(note.id);
         }}
         type="button"
       >
@@ -25,7 +25,7 @@ Note.propTypes = {
     title: string,
     text: string,
   }).isRequired,
-  handleDeleteNote: func.isRequired,
+  deleteNote: func.isRequired,
 };
 
 export default Note;

@@ -3,6 +3,14 @@ import _ from 'lodash';
 import Notes from './Notes';
 import notes from './notes-data';
 
+/**
+ * TODO:
+ * 1. Delete note
+ * 2. Search categories
+ * 3. Styling
+ * 4. Review where functions live. Can some of it be moved to the component?
+ */
+
 class App extends Component {
   state = {
     allNotes: notes,
@@ -84,6 +92,22 @@ class App extends Component {
     });
   };
 
+  deleteNote = (noteID) => {
+    this.setState((prevState) => {
+      const notesCopy = _.cloneDeep(prevState.allNotes);
+      let parentCategory = null;
+
+      if (prevState.selectedCategory !== null && prevState.selectedCategory.categoryID) {
+        parentCategory = this.findCategory(prevState.selectedCategory.categoryID, notesCopy);
+      } else {
+        parentCategory = notesCopy;
+      }
+      parentCategory.notes = parentCategory.notes.filter((note) => note.id !== noteID);
+
+      return { allNotes: notesCopy, selectedCategory: parentCategory };
+    });
+  };
+
   // Let the call stack take care of the recursion since you don't know when the function will be finished
   getCategories = (cat, allCategories) => {
     if (cat && typeof cat.categoryID === 'number') {
@@ -115,6 +139,7 @@ class App extends Component {
           navigateCategory={this.navigateCategory}
           addNote={this.addNote}
           addCategory={this.addCategory}
+          deleteNote={this.deleteNote}
         />
       </div>
     );

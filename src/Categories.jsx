@@ -2,9 +2,17 @@ import React from 'react';
 import { func } from 'prop-types';
 import category from './types';
 import AddCategory from './AddCategory';
+import SearchCategories from './SearchCategories';
 
 const Categories = (props) => {
-  const { navigateCategory, currentCategory, addCategory } = props;
+  const {
+    allNotes,
+    findCategory,
+    navigateCategory,
+    currentCategory,
+    addCategory,
+    getCategories,
+  } = props;
   return (
     <div className="categories">
       <h2>Categories:</h2>
@@ -16,15 +24,24 @@ const Categories = (props) => {
           {cat.categoryName}
         </button>
       ))}
+      <SearchCategories
+        allNotes={allNotes}
+        getCategories={getCategories}
+        navigateCategory={navigateCategory}
+        findCategory={findCategory}
+      />
       <AddCategory addCategory={addCategory} currentCategory={currentCategory} />
     </div>
   );
 };
 
 Categories.propTypes = {
+  allNotes: category.isRequired,
   currentCategory: category.isRequired,
   navigateCategory: func.isRequired,
   addCategory: func.isRequired,
+  getCategories: func.isRequired,
+  findCategory: func.isRequired,
 };
 
 export default Categories;

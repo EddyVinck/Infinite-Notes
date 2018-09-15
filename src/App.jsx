@@ -5,7 +5,6 @@ import notes from './notes-data';
 
 /**
  * TODO:
- * 1. Delete note
  * 2. Search categories
  * 3. Styling
  * 4. Review where functions live. Can some of it be moved to the component?
@@ -109,11 +108,12 @@ class App extends Component {
   };
 
   // Let the call stack take care of the recursion since you don't know when the function will be finished
-  getCategories = (cat, allCategories) => {
-    if (cat && typeof cat.categoryID === 'number') {
-      allCategories.push(cat);
-      if (cat.categories && cat.categories.length > 0) {
-        cat.categories.forEach((subCategory) => {
+  // allCategories is the array you pass in. In this array all categories will be stored.
+  getCategories = (categoryToSearch, allCategories) => {
+    if (categoryToSearch && typeof categoryToSearch.categoryID === 'number') {
+      allCategories.push(categoryToSearch);
+      if (categoryToSearch.categories && categoryToSearch.categories.length > 0) {
+        categoryToSearch.categories.forEach((subCategory) => {
           this.getCategories(subCategory, allCategories);
         });
       }
@@ -135,11 +135,14 @@ class App extends Component {
       <div>
         <h1>Infinite Notes!</h1>
         <Notes
+          allNotes={allNotes}
           notes={notesToView}
           navigateCategory={this.navigateCategory}
+          findCategory={this.findCategory}
           addNote={this.addNote}
           addCategory={this.addCategory}
           deleteNote={this.deleteNote}
+          getCategories={this.getCategories}
         />
       </div>
     );

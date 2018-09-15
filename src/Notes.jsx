@@ -7,7 +7,16 @@ import AddNotes from './AddNote';
 import category from './types';
 
 const Notes = (props) => {
-  const { notes, navigateCategory, addNote, addCategory, deleteNote } = props;
+  const {
+    notes,
+    allNotes,
+    findCategory,
+    navigateCategory,
+    addNote,
+    addCategory,
+    deleteNote,
+    getCategories,
+  } = props;
   const availableCategories = [
     {
       categoryID: notes.categoryID,
@@ -22,9 +31,12 @@ const Notes = (props) => {
   return (
     <Fragment>
       <Categories
+        allNotes={allNotes}
         currentCategory={notes}
+        findCategory={findCategory}
         navigateCategory={navigateCategory}
         addCategory={addCategory}
+        getCategories={getCategories}
       />
       <h2>Notes for {notes.categoryName} category:</h2>
       <AddNotes addNote={addNote} availableCategories={availableCategories} />
@@ -38,11 +50,14 @@ const Notes = (props) => {
 };
 
 Notes.propTypes = {
+  allNotes: category.isRequired,
   notes: category.isRequired,
   navigateCategory: func.isRequired,
   addNote: func.isRequired,
   addCategory: func.isRequired,
+  findCategory: func.isRequired,
   deleteNote: func.isRequired,
+  getCategories: func.isRequired,
 };
 
 export default Notes;

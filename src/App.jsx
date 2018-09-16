@@ -5,9 +5,9 @@ import notes from './notes-data';
 
 /**
  * TODO:
- * 2. Search categories
  * 3. Styling
  * 4. Review where functions live. Can some of it be moved to the component?
+ * 5. Localstorage
  */
 
 class App extends Component {

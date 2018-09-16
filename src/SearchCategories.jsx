@@ -54,7 +54,7 @@ class SearchCategories extends Component {
     const autoCompleteOptions = document.querySelectorAll('.auto-complete-option');
 
     if (event.keyCode === enter) {
-      if (autoCompleteOptions.length >= 0) {
+      if (autoCompleteOptions.length > 0) {
         // navigate to the top option
         autoCompleteOptions[0].click();
       }

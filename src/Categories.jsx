@@ -3,6 +3,7 @@ import { func } from 'prop-types';
 import category from './types';
 import AddCategory from './AddCategory';
 import SearchCategories from './SearchCategories';
+import buttonStyle from './css/button';
 
 const Categories = (props) => {
   const {
@@ -16,11 +17,16 @@ const Categories = (props) => {
   return (
     <div className="categories">
       <h2>Categories:</h2>
-      <button type="button" onClick={() => navigateCategory(null)}>
+      <button className={buttonStyle} type="button" onClick={() => navigateCategory(null)}>
         Home
       </button>
       {currentCategory.categories.map((cat) => (
-        <button onClick={() => navigateCategory(cat)} key={cat.categoryID} type="button">
+        <button
+          className={buttonStyle}
+          onClick={() => navigateCategory(cat)}
+          key={cat.categoryID}
+          type="button"
+        >
           {cat.categoryName}
         </button>
       ))}

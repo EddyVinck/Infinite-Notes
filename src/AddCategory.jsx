@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { func } from 'prop-types';
 import category from './types';
+import buttonStyle from './css/button';
+import formStyle from './css/form';
 
 class AddCategory extends Component {
   state = {
@@ -32,7 +34,7 @@ class AddCategory extends Component {
     return (
       <div className="addCategory">
         <h3>Add a subcategory to {currentCategory.categoryName}:</h3>
-        <form onSubmit={this.handleSubmit}>
+        <form className={formStyle} onSubmit={this.handleSubmit}>
           <input
             onChange={this.handleInputChange}
             value={newCategory.categoryName}
@@ -40,7 +42,9 @@ class AddCategory extends Component {
             name=""
             id=""
           />
-          <button type="submit">Submit</button>
+          <button className={buttonStyle} type="submit">
+            Submit
+          </button>
         </form>
       </div>
     );

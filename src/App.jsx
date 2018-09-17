@@ -133,7 +133,7 @@ class App extends Component {
 
     return (
       <div>
-        <h1>Infinite Notes!</h1>
+        <h1>Infinite Notes</h1>
         <Notes
           allNotes={allNotes}
           notes={notesToView}

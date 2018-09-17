@@ -1,6 +1,33 @@
 import React, { Component } from 'react';
 import { func } from 'prop-types';
+import styled, { css } from 'react-emotion';
 import category from './types';
+import buttonStyle from './css/button';
+import formStyle from './css/form';
+
+const Options = styled('div')`
+  background-color: #fff;
+  border: 1px solid #979797;
+
+  @media (min-width: 600px) {
+    position: absolute;
+  }
+`;
+
+const searchOption = css`
+  background-color: #fff;
+  border-bottom: 1px solid #979797;
+  padding: 2px 4px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: #b8d4ff;
+  }
+`;
 
 class SearchCategories extends Component {
   state = {
@@ -18,8 +45,16 @@ class SearchCategories extends Component {
     });
   };
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const autoCompleteOptions = document.querySelectorAll('.auto-complete-option');
+    if (autoCompleteOptions.length > 0) {
+      // navigate to the top option
+      autoCompleteOptions[0].click();
+    }
+  };
+
   handleCategoryKeyDown = (event) => {
-    // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_autocomplete
     const enter = 13;
     const arrowUp = 38;
     const arrowDown = 40;
@@ -54,10 +89,7 @@ class SearchCategories extends Component {
     const autoCompleteOptions = document.querySelectorAll('.auto-complete-option');
 
     if (event.keyCode === enter) {
-      if (autoCompleteOptions.length > 0) {
-        // navigate to the top option
-        autoCompleteOptions[0].click();
-      }
+      this.handleSubmit(event);
     }
     if (event.keyCode === arrowDown) {
       event.preventDefault();
@@ -88,13 +120,13 @@ class SearchCategories extends Component {
   render() {
     const { searchTerm, autoCompleteOptions } = this.state;
     let searchOptions = '';
-    if (searchTerm !== '') {
+    if (searchTerm !== '' && autoCompleteOptions.length > 0) {
       searchOptions = (
-        <div className="auto-complete-options">
+        <Options className="auto-complete-options">
           {autoCompleteOptions.map((option) => (
             <div
               key={option.categoryID}
-              className="auto-complete-option"
+              className={`auto-complete-option ${searchOption}`}
               onClick={this.handleCategoryChange}
               onKeyDown={this.handleCategoryKeyDown}
               role="tab"
@@ -104,12 +136,12 @@ class SearchCategories extends Component {
               {option.categoryName}
             </div>
           ))}
-        </div>
+        </Options>
       );
     }
 
     return (
-      <div className="search-categories">
+      <form onSubmit={this.handleSubmit} className={`search-categories ${formStyle}`}>
         <h3>Search for a category</h3>
         <input
           onChange={this.handleSearchTermChange}
@@ -117,10 +149,13 @@ class SearchCategories extends Component {
           type="search"
           name="search"
           id="search-input"
+          autoComplete="off"
         />
         {searchOptions}
-        <button type="submit">Search</button>
-      </div>
+        <button className={buttonStyle} type="submit">
+          Search
+        </button>
+      </form>
     );
   }
 }

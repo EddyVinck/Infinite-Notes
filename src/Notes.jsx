@@ -1,10 +1,17 @@
 import React, { Fragment } from 'react';
 import { func } from 'prop-types';
-import Note from './Note';
+import styled from 'react-emotion';
+
+import { Note } from './Note';
 import Categories from './Categories';
 import AddNotes from './AddNote';
-
 import category from './types';
+
+const Div = styled('div')`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+`;
 
 const Notes = (props) => {
   const {
@@ -38,13 +45,13 @@ const Notes = (props) => {
         addCategory={addCategory}
         getCategories={getCategories}
       />
-      <h2>Notes for {notes.categoryName} category:</h2>
       <AddNotes addNote={addNote} availableCategories={availableCategories} />
-      <div className="Notes">
+      <h2>Notes for {notes.categoryName} category:</h2>
+      <Div>
         {notes.notes.map((note) => (
           <Note key={note.id} note={note} deleteNote={deleteNote} />
         ))}
-      </div>
+      </Div>
     </Fragment>
   );
 };

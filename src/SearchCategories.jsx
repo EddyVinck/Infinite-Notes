@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { func } from 'prop-types';
 import styled, { css } from 'react-emotion';
 import category from './types';
-import buttonStyle from './css/button';
+import { basicButton } from './css/button';
 import formStyle from './css/form';
 
 const Options = styled('div')`
@@ -11,6 +11,16 @@ const Options = styled('div')`
 
   @media (min-width: 600px) {
     position: absolute;
+    top: 100%;
+  }
+`;
+
+const SearchBarWrapper = styled('div')`
+  position: relative;
+  margin-bottom: 20px;
+
+  button {
+    margin-bottom: 0;
   }
 `;
 
@@ -141,20 +151,22 @@ class SearchCategories extends Component {
     }
 
     return (
-      <form onSubmit={this.handleSubmit} className={`search-categories ${formStyle}`}>
+      <form onSubmit={this.handleSubmit} className={`${formStyle}`}>
         <h3>Search for a category</h3>
-        <input
-          onChange={this.handleSearchTermChange}
-          onKeyDown={this.handleSearchbarKeyDown}
-          type="search"
-          name="search"
-          id="search-input"
-          autoComplete="off"
-        />
-        {searchOptions}
-        <button className={buttonStyle} type="submit">
-          Search
-        </button>
+        <SearchBarWrapper>
+          <input
+            onChange={this.handleSearchTermChange}
+            onKeyDown={this.handleSearchbarKeyDown}
+            type="search"
+            name="search"
+            id="search-input"
+            autoComplete="off"
+          />
+          <button className={basicButton} type="submit">
+            Search
+          </button>
+          {searchOptions}
+        </SearchBarWrapper>
       </form>
     );
   }

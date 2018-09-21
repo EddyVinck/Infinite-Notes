@@ -1,14 +1,39 @@
 import React, { Component } from 'react';
+import styled, { injectGlobal } from 'react-emotion';
 import _ from 'lodash';
 import Notes from './Notes';
 import notes from './notes-data';
+import globalStyles from './css/globalStyles';
+import contentWrapper from './css/layout';
 
 /**
  * TODO:
  * 3. Styling
  * 4. Review where functions live. Can some of it be moved to the component?
  * 5. Localstorage
+ * 6. Update note
+ * 7. Delete category4
+ * 8. Finetuning
+ *    * no duplicate category names
  */
+
+injectGlobal(globalStyles);
+
+const Header = styled('header')`
+  padding: 60px 0px;
+  margin-bottom: 60px;
+  background: #4b79a1; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #283e51, #4b79a1); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #283e51,
+    #4b79a1
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  h1 {
+    color: #fff;
+    margin-bottom: 0;
+  }
+`;
 
 class App extends Component {
   state = {
@@ -133,7 +158,11 @@ class App extends Component {
 
     return (
       <div>
-        <h1>Infinite Notes</h1>
+        <Header>
+          <div className={contentWrapper}>
+            <h1>Infinite Notes</h1>
+          </div>
+        </Header>
         <Notes
           allNotes={allNotes}
           notes={notesToView}

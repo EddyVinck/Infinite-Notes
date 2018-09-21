@@ -2,8 +2,52 @@ import React, { Component } from 'react';
 import { shape, arrayOf, func, string, number } from 'prop-types';
 import styled, { css } from 'react-emotion';
 import { noteStyle } from './Note';
-import buttonStyle from './css/button';
+import { buttonStyle } from './css/button';
 import formStyle from './css/form';
+
+const largeButton = css`
+  ${buttonStyle};
+
+  background: #4b79a1;
+  background: -webkit-linear-gradient(to right, #283e51, #4b79a1);
+  background: linear-gradient(to right, #283e51, #4b79a1);
+  padding: 20px 70px;
+  border-radius: 10px;
+  align-self: flex-end;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 22px;
+
+  overflow: hidden;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #21d4fd;
+    background-image: linear-gradient(270deg, #21d4fd 0%, #b721ff 100%);
+    background-size: 200% auto;
+    /* background-position: left center; */
+    transition: 0.5s;
+    z-index: 0;
+  }
+
+  span {
+    z-index: 1;
+    position: relative;
+  }
+
+  &:hover,
+  &:focus {
+    &:before {
+      /* background-size: 200% auto; */
+      background-position: right center;
+    }
+  }
+`;
 
 const previewNote = css`
   ${noteStyle} background-color: #ffffa7;
@@ -24,6 +68,8 @@ const Form = styled('form')`
   width: 500px;
   max-width: 100%;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 
   > label {
     font-size: 18px;
@@ -95,9 +141,10 @@ class AddNote extends Component {
   render() {
     const { newNote } = this.state;
     const { availableCategories } = this.props;
+    const showNotePreview = newNote.title !== '' || newNote.text !== '';
     return (
       <div className="add-notes">
-        <h3>Add a note</h3>
+        <h2>Add a note</h2>
 
         <Form className={formStyle} onSubmit={this.handleSubmit} action="">
           <label htmlFor="category">
@@ -135,17 +182,22 @@ class AddNote extends Component {
             />
           </label>
 
-          <button className={buttonStyle} type="submit">
-            Submit
+          <button className={largeButton} type="submit">
+            <span>Submit</span>
           </button>
+          {!showNotePreview ? (
+            <p style={{ alignSelf: 'flex-end' }}>Start writing to preview a new note.</p>
+          ) : (
+            ''
+          )}
         </Form>
-        {newNote.title !== '' || newNote.text !== '' ? (
+        {showNotePreview ? (
           <div className={previewNote}>
             <h4>{newNote.title}</h4>
             <p>{newNote.text}</p>
           </div>
         ) : (
-          <p>Start writing to preview a new note.</p>
+          ''
         )}
       </div>
     );

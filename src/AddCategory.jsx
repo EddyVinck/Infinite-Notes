@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { func } from 'prop-types';
 import category from './types';
-import buttonStyle from './css/button';
+import { basicButton } from './css/button';
 import formStyle from './css/form';
 
 class AddCategory extends Component {
@@ -42,7 +42,7 @@ class AddCategory extends Component {
             name=""
             id=""
           />
-          <button className={buttonStyle} type="submit">
+          <button className={basicButton} type="submit">
             Submit
           </button>
         </form>

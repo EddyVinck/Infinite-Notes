@@ -1,16 +1,31 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { func } from 'prop-types';
 import styled from 'react-emotion';
-
+import contentWrapper from './css/layout';
 import { Note } from './Note';
 import Categories from './Categories';
 import AddNotes from './AddNote';
 import category from './types';
 
-const Div = styled('div')`
+const NotesWrapper = styled('div')`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+`;
+
+const TwoColumns = styled('div')`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  > div {
+    width: 48%;
+    margin-left: 2%;
+
+    &:first-of-type {
+      margin-left: 0%;
+    }
+  }
 `;
 
 const Notes = (props) => {
@@ -36,23 +51,25 @@ const Notes = (props) => {
   ];
 
   return (
-    <Fragment>
-      <Categories
-        allNotes={allNotes}
-        currentCategory={notes}
-        findCategory={findCategory}
-        navigateCategory={navigateCategory}
-        addCategory={addCategory}
-        getCategories={getCategories}
-      />
-      <AddNotes addNote={addNote} availableCategories={availableCategories} />
+    <div className={contentWrapper}>
+      <TwoColumns>
+        <Categories
+          allNotes={allNotes}
+          currentCategory={notes}
+          findCategory={findCategory}
+          navigateCategory={navigateCategory}
+          addCategory={addCategory}
+          getCategories={getCategories}
+        />
+        <AddNotes addNote={addNote} availableCategories={availableCategories} />
+      </TwoColumns>
       <h2>Notes for {notes.categoryName} category:</h2>
-      <Div>
+      <NotesWrapper>
         {notes.notes.map((note) => (
           <Note key={note.id} note={note} deleteNote={deleteNote} />
         ))}
-      </Div>
-    </Fragment>
+      </NotesWrapper>
+    </div>
   );
 };
 

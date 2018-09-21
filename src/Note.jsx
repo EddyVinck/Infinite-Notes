@@ -1,15 +1,49 @@
 import React from 'react';
 import { shape, number, string, func } from 'prop-types';
 import { css } from 'react-emotion';
-import buttonStyle from './css/button';
+import { buttonStyle } from './css/button';
 
 const deleteButton = css`
   ${buttonStyle} color: red;
   border-color: red;
+  transition: 0.2s;
+  padding: 15px 30px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 5px;
+  background-color: #fff;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 0px;
+    top: 0;
+    left: 0;
+    background-color: #7d0606;
+    background-image: linear-gradient(147deg, #7d0606 0%, #ff2525 74%);
+    opacity: 0;
+    transition: 0.3s ease-out;
+    transform-origin: top;
+    z-index: 0;
+  }
+
+  span {
+    z-index: 1;
+    position: relative;
+  }
 
   &:hover {
     color: #fff;
-    background-color: red;
+    background-color: transparent;
+    border-color: red;
+
+    &:before {
+      height: 200%;
+      width: 200%;
+      opacity: 1;
+      /* transform: rotate(30deg); */
+    }
   }
 `;
 
@@ -44,7 +78,7 @@ const Note = (props) => {
   const { note, deleteNote } = props;
   return (
     <div className={noteStyle}>
-      <h2>{note.title}</h2>
+      <h3>{note.title}</h3>
       <p>{note.text}</p>
       <button
         className={deleteButton}
@@ -53,7 +87,7 @@ const Note = (props) => {
         }}
         type="button"
       >
-        Delete
+        <span>Delete</span>
       </button>
     </div>
   );

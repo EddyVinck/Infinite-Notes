@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { func } from 'prop-types';
-import styled, { css } from 'react-emotion';
+import styled, { css, keyframes } from 'react-emotion';
 import contentWrapper from './css/layout';
 import { Note, noteStyle } from './Note';
 import Categories from './Categories';
@@ -12,6 +12,52 @@ const NotesWrapper = styled('div')`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+`;
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const addNoteButton = css`
+  background: none;
+  border: none;
+  font-size: 200px;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transition: 0.2s ease-in;
+`;
+
+const addNoteStyle = css`
+  ${noteStyle};
+  padding: 0;
+  background-color: rgba(255, 250, 7, 0.2);
+  border-color: currentColor;
+  color: #a78911;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s ease-in;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.6);
+    transform: translateY(-4px);
+
+    .${addNoteButton} {
+      color: #000;
+    }
+  }
+  .${addNoteButton} {
+    outline: 0;
+    border: 0;
+  }
 `;
 
 const modalWrapper = css`
@@ -27,6 +73,9 @@ const modalWrapper = css`
   label: modal-wrapper;
   border: 0;
   outline: 0;
+  opacity: 0;
+
+  animation: ${fadeIn} 0.2s forwards;
 `;
 
 const TwoColumns = styled('div')`
@@ -116,9 +165,9 @@ class Notes extends Component {
         </TwoColumns>
         <h2>Notes for {notes.categoryName} category:</h2>
         <NotesWrapper>
-          <div className={noteStyle}>
-            <button type="button" onClick={this.handleShow}>
-              Add note
+          <div className={addNoteStyle}>
+            <button type="button" className={addNoteButton} onClick={this.handleShow}>
+              +
             </button>
             {modal}
           </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { shape, arrayOf, func, string, number } from 'prop-types';
-import styled, { css } from 'react-emotion';
+import { css } from 'react-emotion';
 import { buttonStyle } from './css/button';
 import formStyle from './css/form';
 
@@ -12,7 +12,6 @@ const largeButton = css`
   background: linear-gradient(to right, #283e51, #4b79a1);
   padding: 20px 70px;
   border-radius: 10px;
-  align-self: flex-end;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 22px;
@@ -48,10 +47,69 @@ const largeButton = css`
 const closeButton = css`
   background: transparent;
   border: none;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: arial;
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
+`;
+
+const newNoteStyle = css`
+  background-color: #ffffa7;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  width: 500px;
+  max-width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const newNoteFormStyle = css`
+  ${formStyle};
+  select,
+  input,
+  textarea {
+    margin-bottom: 15px;
+  }
+  .${newNoteStyle} {
+    input,
+    textarea {
+      padding: 8px 10px 6px 6px;
+
+      &:-moz-placeholder,
+      &::-moz-placeholder,
+      &::-webkit-input-placeholder,
+      &::-ms-input-placeholder,
+      &::placeholder {
+        color: rgba(0, 0, 0, 0.4);
+      }
+    }
+    input {
+      border: none;
+      border-bottom: 2px dashed rgba(0, 0, 0, 0.4);
+      font-weight: bold;
+
+      &:focus,
+      &:hover {
+        outline: 0;
+        border-bottom: 2px dashed #000;
+      }
+    }
+    textarea {
+      transition: 0.2s ease-in;
+      /* box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.6); */
+      border-color: rgba(0, 0, 0, 0.4);
+      &:focus,
+      &:hover {
+        outline: 0;
+        box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.6);
+        border-color: transparent;
+      }
+    }
+  }
 `;
 
 const newNoteWrapper = css`
@@ -59,40 +117,11 @@ const newNoteWrapper = css`
   position: relative;
   background-color: #fff;
   padding: 20px 10px;
-`;
 
-const Form = styled('form')`
-  background-color: #ffffa7;
-  border: 1px dashed #000;
-  padding: 15px;
-  width: 500px;
-  max-width: 100%;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-
-  > label {
+  input,
+  textarea {
+    background-color: transparent;
     font-size: 18px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 12px;
-
-    > input,
-    > textarea {
-      width: 300px;
-    }
-    > input {
-    }
-
-    > textarea {
-    }
-  }
-
-  @media (max-width: 600px) {
-    > label {
-      justify-content: flex-start;
-      flex-direction: column;
-    }
   }
 `;
 
@@ -101,8 +130,8 @@ class AddNoteForm extends Component {
     newNote: {
       categoryID: '',
       categoryName: '',
-      title: 'title',
-      text: 'text',
+      title: '',
+      text: '',
     },
   };
 
@@ -148,7 +177,7 @@ class AddNoteForm extends Component {
         </button>
         <h2>Add a note</h2>
 
-        <Form className={formStyle} onSubmit={this.handleSubmit} action="">
+        <form className={newNoteFormStyle} onSubmit={this.handleSubmit} action="">
           <label htmlFor="category">
             Category:
             <select id="category" name="category" ref={this.setCategorySelectRef}>
@@ -160,21 +189,18 @@ class AddNoteForm extends Component {
             </select>
           </label>
 
-          <label htmlFor="title">
-            Title:
+          <div className={newNoteStyle}>
             <input
               type="text"
+              placeholder="My note's title..."
               id="title"
               name="title"
               value={newNote.title}
               onChange={this.handleInputChange}
               autoComplete="off"
             />
-          </label>
-
-          <label htmlFor="text">
-            Text:
             <textarea
+              placeholder="My note's description..."
               type="text"
               id="text"
               name="text"
@@ -182,12 +208,12 @@ class AddNoteForm extends Component {
               onChange={this.handleInputChange}
               autoComplete="off"
             />
-          </label>
+          </div>
 
           <button className={largeButton} type="submit">
             <span>Submit</span>
           </button>
-        </Form>
+        </form>
       </div>
     );
   }

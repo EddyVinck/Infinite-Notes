@@ -7,6 +7,7 @@ body {
 }
 * {
   box-sizing: border-box;
+  font-family: sans-serif;
 }
 h1 {
   font-size: 60px;

@@ -1,47 +1,19 @@
 import React, { Component } from 'react';
 import { shape, arrayOf, func, string, number } from 'prop-types';
 import { css } from 'react-emotion';
-import { buttonStyle } from './css/button';
+import { buttonStyle, buttonGradient } from './css/button';
 import formStyle from './css/form';
 
 const largeButton = css`
   ${buttonStyle};
+  ${buttonGradient};
 
-  background: #4b79a1;
-  background: -webkit-linear-gradient(to right, #283e51, #4b79a1);
-  background: linear-gradient(to right, #283e51, #4b79a1);
   padding: 20px 70px;
   border-radius: 10px;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 22px;
   overflow: hidden;
-
-  &:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: #21d4fd;
-    background-image: linear-gradient(270deg, #21d4fd 0%, #b721ff 100%);
-    background-size: 200% auto;
-    transition: 0.5s;
-    z-index: 0;
-  }
-
-  span {
-    z-index: 1;
-    position: relative;
-  }
-
-  &:hover,
-  &:focus {
-    &:before {
-      background-position: right center;
-    }
-  }
 `;
 
 const closeButton = css`

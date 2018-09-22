@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { func } from 'prop-types';
 import styled, { css, keyframes } from 'react-emotion';
-import contentWrapper from './css/layout';
 import { Note, noteStyle } from './Note';
 import Categories from './Categories';
 import AddNoteForm from './AddNoteForm';
 import category from './types';
 import Modal from './Modal';
+import { contentWrapper, sectionPadding } from './css/layout';
 
 const NotesWrapper = styled('div')`
   display: flex;
@@ -78,21 +78,6 @@ const modalWrapper = css`
   animation: ${fadeIn} 0.2s forwards;
 `;
 
-const TwoColumns = styled('div')`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-
-  > div {
-    width: 48%;
-    margin-left: 2%;
-
-    &:first-of-type {
-      margin-left: 0%;
-    }
-  }
-`;
-
 class Notes extends Component {
   state = {
     showModal: false,
@@ -152,29 +137,29 @@ class Notes extends Component {
     ) : null;
 
     return (
-      <div className={contentWrapper}>
-        <TwoColumns>
-          <Categories
-            allNotes={allNotes}
-            currentCategory={notes}
-            findCategory={findCategory}
-            navigateCategory={navigateCategory}
-            addCategory={addCategory}
-            getCategories={getCategories}
-          />
-        </TwoColumns>
-        <h2>Notes for {notes.categoryName} category:</h2>
-        <NotesWrapper>
-          <div className={addNoteStyle}>
-            <button type="button" className={addNoteButton} onClick={this.handleShow}>
-              +
-            </button>
-            {modal}
-          </div>
-          {notes.notes.map((note) => (
-            <Note key={note.id} note={note} deleteNote={deleteNote} />
-          ))}
-        </NotesWrapper>
+      <div>
+        <Categories
+          allNotes={allNotes}
+          currentCategory={notes}
+          findCategory={findCategory}
+          navigateCategory={navigateCategory}
+          addCategory={addCategory}
+          getCategories={getCategories}
+        />
+        <div className={`${contentWrapper} ${sectionPadding.standard}`}>
+          <h2>Notes for {notes.categoryName} category:</h2>
+          <NotesWrapper>
+            <div className={addNoteStyle}>
+              <button type="button" className={addNoteButton} onClick={this.handleShow}>
+                +
+              </button>
+              {modal}
+            </div>
+            {notes.notes.map((note) => (
+              <Note key={note.id} note={note} deleteNote={deleteNote} />
+            ))}
+          </NotesWrapper>
+        </div>
       </div>
     );
   }

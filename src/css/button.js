@@ -9,6 +9,7 @@ const basicButton = css`
   font-weight: bold;
   font-size: 17px;
   transition: 0.3s ease-out;
+  position: relative;
 
   &:hover,
   &:focus {
@@ -32,4 +33,35 @@ const buttonStyle = css`
   }
 `;
 
-export { basicButton, buttonStyle };
+const buttonGradient = css`
+  background: #4b79a1;
+  background: -webkit-linear-gradient(to right, #283e51, #4b79a1);
+  background: linear-gradient(to right, #283e51, #4b79a1);
+  color: #fff;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #21d4fd;
+    background-image: linear-gradient(270deg, #21d4fd 0%, #b721ff 100%);
+    background-size: 200% auto;
+    transition: 0.5s;
+  }
+
+  span {
+    position: relative;
+  }
+
+  &:hover,
+  &:focus {
+    &:before {
+      background-position: right center;
+    }
+  }
+`;
+
+export { basicButton, buttonStyle, buttonGradient };

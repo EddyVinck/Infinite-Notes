@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { func } from 'prop-types';
 import styled, { css } from 'react-emotion';
 import category from './types';
-import { basicButton } from './css/button';
+import { basicButton, buttonGradient } from './css/button';
 import formStyle from './css/form';
 
 const Options = styled('div')`
@@ -41,6 +41,11 @@ const searchOption = css`
   &:focus {
     background-color: #b8d4ff;
   }
+`;
+
+const basicButtonWithGradient = css`
+  ${basicButton};
+  ${buttonGradient};
 `;
 
 class SearchCategories extends Component {
@@ -166,8 +171,8 @@ class SearchCategories extends Component {
             id="search-input"
             autoComplete="off"
           />
-          <button className={basicButton} type="submit">
-            Search
+          <button className={basicButtonWithGradient} type="submit">
+            <span>Search</span>
           </button>
           {searchOptions}
         </SearchBarWrapper>

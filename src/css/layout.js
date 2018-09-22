@@ -12,4 +12,11 @@ const contentWrapper = css`
   }
 `;
 
-export default contentWrapper;
+const sectionPadding = {
+  standard: css`
+    padding-top: 60px;
+    padding-bottom: 40px;
+  `,
+};
+
+export { contentWrapper, sectionPadding };

@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { func } from 'prop-types';
-import styled from 'react-emotion';
+import styled, { css } from 'react-emotion';
 import category from './types';
 import AddCategory from './AddCategory';
+import { contentWrapper, sectionPadding } from './css/layout';
 import { buttonStyle } from './css/button';
+import colors from './css/colors';
+
+const categoriesSection = css`
+  ${sectionPadding.standard};
+  background: ${colors.white};
+`;
 
 const CategoryControls = styled('div')`
   display: flex;
@@ -42,33 +49,35 @@ class Categories extends Component {
     const { showAddCategories } = this.state;
     const { navigateCategory, currentCategory, addCategory } = this.props;
     return (
-      <div className="categories">
-        <h2>Categories:</h2>
-        <CategoryControls>
-          <button className={buttonStyle} type="button" onClick={() => navigateCategory(null)}>
-            Home
-          </button>
-          {currentCategory.categories.map((cat) => (
-            <button
-              className={buttonStyle}
-              onClick={() => navigateCategory(cat)}
-              key={cat.categoryID}
-              type="button"
-            >
-              {cat.categoryName}
+      <div className={categoriesSection}>
+        <div className={contentWrapper}>
+          <h2>Categories:</h2>
+          <CategoryControls>
+            <button className={buttonStyle} type="button" onClick={() => navigateCategory(null)}>
+              Home
             </button>
-          ))}
-          <button className={buttonStyle} onClick={this.handleShowAddCategories} type="button">
-            +
-          </button>
-        </CategoryControls>
-        {showAddCategories ? (
-          <AddCategory
-            hideAddCategories={this.hideAddCategories}
-            addCategory={addCategory}
-            currentCategory={currentCategory}
-          />
-        ) : null}
+            {currentCategory.categories.map((cat) => (
+              <button
+                className={buttonStyle}
+                onClick={() => navigateCategory(cat)}
+                key={cat.categoryID}
+                type="button"
+              >
+                {cat.categoryName}
+              </button>
+            ))}
+            <button className={buttonStyle} onClick={this.handleShowAddCategories} type="button">
+              +
+            </button>
+          </CategoryControls>
+          {showAddCategories ? (
+            <AddCategory
+              hideAddCategories={this.hideAddCategories}
+              addCategory={addCategory}
+              currentCategory={currentCategory}
+            />
+          ) : null}
+        </div>
       </div>
     );
   }

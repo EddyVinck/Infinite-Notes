@@ -4,7 +4,7 @@ import _ from 'lodash';
 import Notes from './Notes';
 import notes from './notes-data';
 import globalStyles from './css/globalStyles';
-import contentWrapper from './css/layout';
+import { contentWrapper } from './css/layout';
 import SearchCategories from './SearchCategories';
 
 /**
@@ -22,7 +22,6 @@ injectGlobal(globalStyles);
 
 const Header = styled('header')`
   padding: 60px 0px;
-  margin-bottom: 60px;
   background: #4b79a1; /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #283e51, #4b79a1); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(

@@ -2,6 +2,7 @@ import React from 'react';
 import { shape, number, string, func } from 'prop-types';
 import { css } from 'react-emotion';
 import { buttonStyle } from './css/button';
+import colors from './css/colors';
 
 const deleteButton = css`
   ${buttonStyle} color: red;
@@ -49,7 +50,7 @@ const deleteButton = css`
 
 const noteStyle = css`
   border: 2px solid #979797;
-  background-color: #fdfdfd;
+  background-color: ${colors.white};
   padding: 30px;
   width: 32%;
   margin-left: 2%;

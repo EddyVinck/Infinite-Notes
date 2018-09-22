@@ -22,6 +22,9 @@ const SearchBarWrapper = styled('div')`
   button,
   input {
     border: none;
+    &:hover {
+      border: none;
+    }
   }
 
   button {

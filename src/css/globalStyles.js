@@ -1,7 +1,9 @@
+import colors from './colors';
+
 export default `
 body {
   background-color: #f2f2f2;
-  color: rgba(0, 0, 0, 0.92);
+  color: ${colors.black};
   font-family: sans-serif;
   margin: 0;
 }

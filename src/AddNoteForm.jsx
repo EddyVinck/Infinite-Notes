@@ -149,20 +149,25 @@ class AddNoteForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { addNote } = this.props;
+    const { addNote, hideModal } = this.props;
     const { selectedIndex } = this.categorySelect.options;
     const { value, innerText } = this.categorySelect.options[selectedIndex];
 
-    this.setState((prevState) => {
-      const newNote = Object.assign({}, prevState.newNote, {
-        categoryID: Number(value),
-        categoryName: innerText,
-      });
-      addNote(newNote);
-      return {
-        newNote,
-      };
-    });
+    this.setState(
+      (prevState) => {
+        const newNote = Object.assign({}, prevState.newNote, {
+          categoryID: Number(value),
+          categoryName: innerText,
+        });
+        addNote(newNote);
+        return {
+          newNote,
+        };
+      },
+      () => {
+        hideModal();
+      }
+    );
   };
 
   setCategorySelectRef = (element) => {
@@ -230,6 +235,7 @@ AddNoteForm.propTypes = {
   ).isRequired,
   addNote: func.isRequired,
   handleHide: func.isRequired,
+  hideModal: func.isRequired,
 };
 
 export default AddNoteForm;

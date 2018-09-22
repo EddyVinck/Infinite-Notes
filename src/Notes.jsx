@@ -88,9 +88,16 @@ class Notes extends Component {
   };
 
   handleHide = (event) => {
-    if (event.target.hasAttribute('modal-wrapper') || event.target.hasAttribute('close-modal')) {
-      this.setState({ showModal: false });
+    if (
+      event &&
+      (event.target.hasAttribute('modal-wrapper') || event.target.hasAttribute('close-modal'))
+    ) {
+      this.hideModal();
     }
+  };
+
+  hideModal = () => {
+    this.setState({ showModal: false });
   };
 
   render() {
@@ -131,6 +138,7 @@ class Notes extends Component {
             availableCategories={availableCategories}
             addNote={addNote}
             handleHide={this.handleHide}
+            hideModal={this.hideModal}
           />
         </div>
       </Modal>

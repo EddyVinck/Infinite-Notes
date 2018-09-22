@@ -16,11 +16,15 @@ const Options = styled('div')`
 `;
 
 const SearchBarWrapper = styled('div')`
+  display: flex;
   position: relative;
-  margin-bottom: 20px;
 
   button {
     margin-bottom: 0;
+  }
+  input {
+    font-size: 16px;
+    line-height: 22px;
   }
 `;
 
@@ -152,11 +156,11 @@ class SearchCategories extends Component {
 
     return (
       <form onSubmit={this.handleSubmit} className={`${formStyle}`}>
-        <h3>Search for a category</h3>
         <SearchBarWrapper>
           <input
             onChange={this.handleSearchTermChange}
             onKeyDown={this.handleSearchbarKeyDown}
+            placeholder="Category name"
             type="search"
             name="search"
             id="search-input"

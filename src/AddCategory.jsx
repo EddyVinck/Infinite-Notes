@@ -18,9 +18,10 @@ class AddCategory extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { addCategory, currentCategory } = this.props;
+    const { addCategory, currentCategory, hideAddCategories } = this.props;
     const { newCategory } = this.state;
     addCategory(newCategory.categoryName, currentCategory);
+    hideAddCategories();
   };
 
   handleInputChange = (event) => {
@@ -53,6 +54,7 @@ class AddCategory extends Component {
 
 AddCategory.propTypes = {
   addCategory: func.isRequired,
+  hideAddCategories: func.isRequired,
   currentCategory: category.isRequired,
 };
 

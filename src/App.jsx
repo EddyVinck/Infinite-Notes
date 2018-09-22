@@ -5,6 +5,7 @@ import Notes from './Notes';
 import notes from './notes-data';
 import globalStyles from './css/globalStyles';
 import contentWrapper from './css/layout';
+import SearchCategories from './SearchCategories';
 
 /**
  * TODO:
@@ -32,6 +33,12 @@ const Header = styled('header')`
   h1 {
     color: #fff;
     margin-bottom: 0;
+  }
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 `;
 
@@ -161,6 +168,12 @@ class App extends Component {
         <Header>
           <div className={contentWrapper}>
             <h1>Infinite Notes</h1>
+            <SearchCategories
+              allNotes={allNotes}
+              getCategories={this.getCategories}
+              navigateCategory={this.navigateCategory}
+              findCategory={this.findCategory}
+            />
           </div>
         </Header>
         <Notes

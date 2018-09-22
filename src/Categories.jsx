@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { func } from 'prop-types';
 import styled from 'react-emotion';
 import category from './types';
 import AddCategory from './AddCategory';
-import SearchCategories from './SearchCategories';
 import { buttonStyle } from './css/button';
 
 const CategoryControls = styled('div')`
@@ -16,9 +15,6 @@ const CategoryControls = styled('div')`
     border-radius: 3px;
     margin-right: 15px;
 
-    &:nth-of-type(n + 2) {
-    }
-
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
     transition: 0.3s ease-out;
     transform: translateY(0px);
@@ -29,51 +25,59 @@ const CategoryControls = styled('div')`
   }
 `;
 
-const Categories = (props) => {
-  const {
-    allNotes,
-    findCategory,
-    navigateCategory,
-    currentCategory,
-    addCategory,
-    getCategories,
-  } = props;
-  return (
-    <div className="categories">
-      <h2>Categories:</h2>
-      <CategoryControls>
-        <button className={buttonStyle} type="button" onClick={() => navigateCategory(null)}>
-          Home
-        </button>
-        {currentCategory.categories.map((cat) => (
-          <button
-            className={buttonStyle}
-            onClick={() => navigateCategory(cat)}
-            key={cat.categoryID}
-            type="button"
-          >
-            {cat.categoryName}
+class Categories extends Component {
+  state = {
+    showAddCategories: false,
+  };
+
+  handleShowAddCategories = () => {
+    this.setState({ showAddCategories: true });
+  };
+
+  hideAddCategories = () => {
+    this.setState({ showAddCategories: false });
+  };
+
+  render() {
+    const { showAddCategories } = this.state;
+    const { navigateCategory, currentCategory, addCategory } = this.props;
+    return (
+      <div className="categories">
+        <h2>Categories:</h2>
+        <CategoryControls>
+          <button className={buttonStyle} type="button" onClick={() => navigateCategory(null)}>
+            Home
           </button>
-        ))}
-      </CategoryControls>
-      <SearchCategories
-        allNotes={allNotes}
-        getCategories={getCategories}
-        navigateCategory={navigateCategory}
-        findCategory={findCategory}
-      />
-      <AddCategory addCategory={addCategory} currentCategory={currentCategory} />
-    </div>
-  );
-};
+          {currentCategory.categories.map((cat) => (
+            <button
+              className={buttonStyle}
+              onClick={() => navigateCategory(cat)}
+              key={cat.categoryID}
+              type="button"
+            >
+              {cat.categoryName}
+            </button>
+          ))}
+          <button className={buttonStyle} onClick={this.handleShowAddCategories} type="button">
+            +
+          </button>
+        </CategoryControls>
+        {showAddCategories ? (
+          <AddCategory
+            hideAddCategories={this.hideAddCategories}
+            addCategory={addCategory}
+            currentCategory={currentCategory}
+          />
+        ) : null}
+      </div>
+    );
+  }
+}
 
 Categories.propTypes = {
-  allNotes: category.isRequired,
   currentCategory: category.isRequired,
   navigateCategory: func.isRequired,
   addCategory: func.isRequired,
-  getCategories: func.isRequired,
-  findCategory: func.isRequired,
 };
 
 export default Categories;

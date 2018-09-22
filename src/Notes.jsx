@@ -61,7 +61,7 @@ const addNoteStyle = css`
 `;
 
 const modalWrapper = css`
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(1, 5, 25, 0.5);
   position: fixed;
   height: 100%;
   width: 100%;

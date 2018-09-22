@@ -72,8 +72,26 @@ const newNoteFormStyle = css`
   select,
   input,
   textarea {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }
+
+  label {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+    span {
+      font-weight: bold;
+    }
+
+    select {
+      margin-left: 10px;
+      flex-grow: 1;
+      margin-bottom: 0;
+    }
+  }
+
   .${newNoteStyle} {
     input,
     textarea {
@@ -100,12 +118,24 @@ const newNoteFormStyle = css`
     }
     textarea {
       transition: 0.2s ease-in;
-      /* box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.6); */
-      border-color: rgba(0, 0, 0, 0.4);
+      border-color: transparent;
+      position: relative;
+      resize: none;
+      height: 200px;
+
+      &::before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 2000;
+      }
+
       &:focus,
       &:hover {
         outline: 0;
-        box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.6);
         border-color: transparent;
       }
     }
@@ -116,7 +146,7 @@ const newNoteWrapper = css`
   z-index: 1000;
   position: relative;
   background-color: #fff;
-  padding: 20px 10px;
+  padding: 30px 30px;
 
   input,
   textarea {
@@ -179,7 +209,7 @@ class AddNoteForm extends Component {
 
         <form className={newNoteFormStyle} onSubmit={this.handleSubmit} action="">
           <label htmlFor="category">
-            Category:
+            <span>Category:</span>
             <select id="category" name="category" ref={this.setCategorySelectRef}>
               {availableCategories.map((cat) => (
                 <option key={cat.categoryID} value={cat.categoryID}>

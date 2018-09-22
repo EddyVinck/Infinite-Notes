@@ -33,7 +33,8 @@ const deleteButton = css`
     position: relative;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: #fff;
     background-color: transparent;
     border-color: red;
@@ -42,7 +43,6 @@ const deleteButton = css`
       height: 200%;
       width: 200%;
       opacity: 1;
-      /* transform: rotate(30deg); */
     }
   }
 `;

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { shape, arrayOf, func, string, number } from 'prop-types';
 import styled, { css } from 'react-emotion';
-import { noteStyle } from './Note';
 import { buttonStyle } from './css/button';
 import formStyle from './css/form';
 
@@ -17,7 +16,6 @@ const largeButton = css`
   text-transform: uppercase;
   font-weight: bold;
   font-size: 22px;
-
   overflow: hidden;
 
   &:before {
@@ -30,7 +28,6 @@ const largeButton = css`
     background-color: #21d4fd;
     background-image: linear-gradient(270deg, #21d4fd 0%, #b721ff 100%);
     background-size: 200% auto;
-    /* background-position: left center; */
     transition: 0.5s;
     z-index: 0;
   }
@@ -43,28 +40,31 @@ const largeButton = css`
   &:hover,
   &:focus {
     &:before {
-      /* background-size: 200% auto; */
       background-position: right center;
     }
   }
 `;
 
-const previewNote = css`
-  ${noteStyle} background-color: #ffffa7;
-  padding: 15px;
-  border: 1px dashed #000;
-  position: relative;
+const closeButton = css`
+  background: transparent;
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+`;
 
-  &:before {
-    content: '(concept)';
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: rgba(0, 0, 0, 0.6);
-  }
+const newNoteWrapper = css`
+  z-index: 1000;
+  position: relative;
+  background-color: #fff;
+  padding: 20px 10px;
 `;
 
 const Form = styled('form')`
+  background-color: #ffffa7;
+  border: 1px dashed #000;
+  padding: 15px;
   width: 500px;
   max-width: 100%;
   margin-bottom: 20px;
@@ -96,13 +96,13 @@ const Form = styled('form')`
   }
 `;
 
-class AddNote extends Component {
+class AddNoteForm extends Component {
   state = {
     newNote: {
       categoryID: '',
       categoryName: '',
-      title: '',
-      text: '',
+      title: 'title',
+      text: 'text',
     },
   };
 
@@ -140,10 +140,12 @@ class AddNote extends Component {
 
   render() {
     const { newNote } = this.state;
-    const { availableCategories } = this.props;
-    const showNotePreview = newNote.title !== '' || newNote.text !== '';
+    const { availableCategories, handleHide } = this.props;
     return (
-      <div className="add-notes">
+      <div className={newNoteWrapper}>
+        <button type="button" className={closeButton} close-modal="" onClick={handleHide}>
+          X
+        </button>
         <h2>Add a note</h2>
 
         <Form className={formStyle} onSubmit={this.handleSubmit} action="">
@@ -170,7 +172,7 @@ class AddNote extends Component {
             />
           </label>
 
-          <label htmlFor="myText">
+          <label htmlFor="text">
             Text:
             <textarea
               type="text"
@@ -185,26 +187,13 @@ class AddNote extends Component {
           <button className={largeButton} type="submit">
             <span>Submit</span>
           </button>
-          {!showNotePreview ? (
-            <p style={{ alignSelf: 'flex-end' }}>Start writing to preview a new note.</p>
-          ) : (
-            ''
-          )}
         </Form>
-        {showNotePreview ? (
-          <div className={previewNote}>
-            <h4>{newNote.title}</h4>
-            <p>{newNote.text}</p>
-          </div>
-        ) : (
-          ''
-        )}
       </div>
     );
   }
 }
 
-AddNote.propTypes = {
+AddNoteForm.propTypes = {
   availableCategories: arrayOf(
     shape({
       categoryID: number,
@@ -212,6 +201,7 @@ AddNote.propTypes = {
     })
   ).isRequired,
   addNote: func.isRequired,
+  handleHide: func.isRequired,
 };
 
-export default AddNote;
+export default AddNoteForm;

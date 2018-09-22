@@ -26,6 +26,7 @@ const formStyle = css`
     }
   }
   textarea {
+    padding: 10px 14px;
     height: 150px;
     resize: vertical;
   }

@@ -17,4 +17,8 @@ h2 {
 h1, h2, h3, h4, h5, h6, p, ul, li, blockquote {
   margin-top: 0;
 }
+#modal-root {
+  position: relative;
+  z-index: 999;
+}
 `;

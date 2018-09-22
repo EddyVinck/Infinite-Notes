@@ -19,6 +19,11 @@ const SearchBarWrapper = styled('div')`
   display: flex;
   position: relative;
 
+  button,
+  input {
+    border: none;
+  }
+
   button {
     margin-bottom: 0;
   }

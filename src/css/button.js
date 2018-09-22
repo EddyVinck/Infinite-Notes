@@ -38,6 +38,7 @@ const buttonGradient = css`
   background: -webkit-linear-gradient(to right, #283e51, #4b79a1);
   background: linear-gradient(to right, #283e51, #4b79a1);
   color: #fff;
+  border-color: #283e51;
 
   &:before {
     content: '';
@@ -58,6 +59,8 @@ const buttonGradient = css`
 
   &:hover,
   &:focus {
+    border-color: #283e51;
+
     &:before {
       background-position: right center;
     }

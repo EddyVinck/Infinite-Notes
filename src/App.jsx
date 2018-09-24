@@ -145,11 +145,39 @@ class App extends Component {
       } else {
         parentCategory = notesCopy;
       }
+      // Only return the notes with a different ID
       parentCategory.notes = parentCategory.notes.filter((note) => note.id !== noteID);
 
       return { allNotes: notesCopy, selectedCategory: parentCategory };
     });
   };
+
+  /* eslint-disable no-console */
+  editNote = (noteID) => {
+    console.log(noteID);
+
+    this.setState((prevState) => {
+      const notesCopy = _.cloneDeep(prevState.allNotes);
+      let parentCategory = null;
+
+      if (prevState.selectedCategory !== null && prevState.selectedCategory.categoryID) {
+        parentCategory = this.findCategory(prevState.selectedCategory.categoryID, notesCopy);
+      } else {
+        parentCategory = notesCopy;
+      }
+
+      const noteRef = parentCategory.notes.find((note) => note.id === noteID);
+
+      if (noteRef) {
+        // Prompt the user with the edit note modal
+        // apply changes to the noteRef
+        noteRef.title = 'THIS NOTE WAS EDITED!';
+      }
+
+      return { allNotes: notesCopy, selectedCategory: parentCategory };
+    });
+  };
+  /* eslint-enable no-console */
 
   // Let the call stack take care of the recursion since you don't know when the function will be finished
   // allCategories is the array you pass in. In this array all categories will be stored.
@@ -196,6 +224,7 @@ class App extends Component {
           addNote={this.addNote}
           addCategory={this.addCategory}
           deleteNote={this.deleteNote}
+          editNote={this.editNote}
           getCategories={this.getCategories}
         />
       </div>

@@ -110,6 +110,7 @@ class Notes extends Component {
       addNote,
       addCategory,
       deleteNote,
+      editNote,
       getCategories,
     } = this.props;
     const availableCategories = [
@@ -165,7 +166,7 @@ class Notes extends Component {
               {modal}
             </div>
             {notes.notes.map((note) => (
-              <Note key={note.id} note={note} deleteNote={deleteNote} />
+              <Note key={note.id} note={note} editNote={editNote} deleteNote={deleteNote} />
             ))}
           </NotesWrapper>
         </div>
@@ -182,6 +183,7 @@ Notes.propTypes = {
   addCategory: func.isRequired,
   findCategory: func.isRequired,
   deleteNote: func.isRequired,
+  editNote: func.isRequired,
   getCategories: func.isRequired,
 };
 

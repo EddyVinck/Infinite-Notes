@@ -5,8 +5,16 @@ import { buttonStyle } from './css/button';
 import colors from './css/colors';
 import breakpoints from './css/breakpoints';
 
+const editButton = css`
+  ${buttonStyle};
+  padding: 15px 30px;
+  border-radius: 5px;
+`;
+
 const deleteButton = css`
-  ${buttonStyle} color: red;
+  ${buttonStyle};
+  margin-right: 10px;
+  color: red;
   border-color: red;
   transition: 0.2s;
   padding: 15px 30px;
@@ -84,7 +92,7 @@ const noteStyle = css`
 `;
 
 const Note = (props) => {
-  const { note, deleteNote } = props;
+  const { note, deleteNote, editNote } = props;
   return (
     <div className={noteStyle}>
       <h3>{note.title}</h3>
@@ -98,6 +106,15 @@ const Note = (props) => {
       >
         <span>Delete</span>
       </button>
+      <button
+        className={editButton}
+        onClick={() => {
+          editNote(note.id);
+        }}
+        type="button"
+      >
+        <span>Edit</span>
+      </button>
     </div>
   );
 };
@@ -109,6 +126,7 @@ Note.propTypes = {
     text: string,
   }).isRequired,
   deleteNote: func.isRequired,
+  editNote: func.isRequired,
 };
 
 export { Note, noteStyle };

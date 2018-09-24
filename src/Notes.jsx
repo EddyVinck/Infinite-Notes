@@ -44,6 +44,7 @@ const addNoteStyle = css`
   justify-content: center;
   align-items: center;
   transition: 0.2s ease-in;
+  label: add-button;
 
   &:hover,
   &:focus {

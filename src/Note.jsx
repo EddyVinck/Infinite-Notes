@@ -3,6 +3,7 @@ import { shape, number, string, func } from 'prop-types';
 import { css } from 'react-emotion';
 import { buttonStyle } from './css/button';
 import colors from './css/colors';
+import breakpoints from './css/breakpoints';
 
 const deleteButton = css`
   ${buttonStyle} color: red;
@@ -55,12 +56,15 @@ const noteStyle = css`
   width: 32%;
   margin-left: 2%;
   margin-bottom: 40px;
+  label: note;
 
-  &:nth-of-type(3n + 1) {
-    margin-left: 0%;
+  ${breakpoints.tabletUp} {
+    &:nth-of-type(3n + 1) {
+      margin-left: 0%;
+    }
   }
 
-  @media (max-width: 920px) {
+  ${breakpoints.tabletDown} {
     width: 49%;
     margin-left: 2%;
 
@@ -69,7 +73,7 @@ const noteStyle = css`
     }
   }
 
-  @media (max-width: 600px) {
+  ${breakpoints.mobileDown} {
     width: 100%;
     margin-left: 0%;
   }

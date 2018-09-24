@@ -19,6 +19,7 @@ const config = {
     inline: true,
     publicPath: '/public/',
     port: 3000,
+    bonjour: true,
   },
   watchOptions: {
     aggregateTimeout: 300,

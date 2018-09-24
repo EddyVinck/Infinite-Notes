@@ -4,12 +4,13 @@ import styled, { css } from 'react-emotion';
 import category from './types';
 import { basicButton, buttonGradient } from './css/button';
 import formStyle from './css/form';
+import breakpoints from './css/breakpoints';
 
 const Options = styled('div')`
   background-color: #fff;
   border: 1px solid #979797;
 
-  @media (min-width: 600px) {
+  @media (min-width: 601px) {
     position: absolute;
     top: 100%;
   }
@@ -33,6 +34,10 @@ const SearchBarWrapper = styled('div')`
   input {
     font-size: 16px;
     line-height: 22px;
+  }
+
+  ${breakpoints.mobileDown} {
+    flex-direction: column;
   }
 `;
 

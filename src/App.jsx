@@ -6,16 +6,17 @@ import notes from './notes-data';
 import globalStyles from './css/globalStyles';
 import { contentWrapper } from './css/layout';
 import SearchCategories from './SearchCategories';
+import breakpoints from './css/breakpoints';
 
 /**
  * TODO:
- * 3. Styling
- * 4. Review where functions live. Can some of it be moved to the component?
- * 5. Localstorage
- * 6. Update note
- * 7. Delete category4
- * 8. Finetuning
- *    * no duplicate category names
+ * - Review where functions live. Can some of it be moved to the component?
+ * - Localstorage
+ * - Update note
+ * - Delete category
+ * - Finetuning
+ *    - No duplicate category names
+ *    - Form validation
  */
 
 injectGlobal(globalStyles);
@@ -38,6 +39,18 @@ const Header = styled('header')`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 835px) {
+      flex-direction: column;
+
+      h1 {
+        margin-bottom: 15px;
+      }
+    }
+
+    ${breakpoints.mobileDown} {
+      align-items: flex-start;
+    }
   }
 `;
 

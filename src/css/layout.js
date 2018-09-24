@@ -1,4 +1,5 @@
 import { css } from 'react-emotion';
+import breakpoints from './breakpoints';
 
 const contentWrapper = css`
   margin: 0 auto;
@@ -7,7 +8,7 @@ const contentWrapper = css`
   @media (max-width: 1220px) {
     max-width: 90%;
   }
-  @media (max-width: 600px) {
+  ${breakpoints.mobileDown} {
     margin: 0 5%;
   }
 `;

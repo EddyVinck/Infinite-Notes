@@ -10,10 +10,7 @@ const categoryStructure = {
   categoryID: number,
   categoryName: string,
   notes: arrayOf(note),
-  // categories: [],
 };
-
-// categoryStructure.categories = arrayOf(categoryStructure);
 
 const category = shape(categoryStructure);
 

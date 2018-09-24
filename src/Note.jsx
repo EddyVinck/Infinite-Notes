@@ -73,6 +73,10 @@ const noteStyle = css`
     width: 100%;
     margin-left: 0%;
   }
+
+  p {
+    white-space: pre-line;
+  }
 `;
 
 const Note = (props) => {

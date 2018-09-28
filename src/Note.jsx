@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { shape, number, string, func } from 'prop-types';
 import { css } from 'react-emotion';
 import { buttonStyle } from './css/button';
@@ -91,33 +91,36 @@ const noteStyle = css`
   }
 `;
 
-const Note = (props) => {
-  const { note, deleteNote, editNote } = props;
-  return (
-    <div className={noteStyle}>
-      <h3>{note.title}</h3>
-      <p>{note.text}</p>
-      <button
-        className={deleteButton}
-        onClick={() => {
-          deleteNote(note.id);
-        }}
-        type="button"
-      >
-        <span>Delete</span>
-      </button>
-      <button
-        className={editButton}
-        onClick={() => {
-          editNote(note.id);
-        }}
-        type="button"
-      >
-        <span>Edit</span>
-      </button>
-    </div>
-  );
-};
+class Note extends Component {
+  // Still need to reset the noteToEdit after editing or closing the modal
+  handleEditNote = () => {
+    const { showEditModal, note } = this.props;
+
+    showEditModal(note);
+  };
+
+  render() {
+    const { note, deleteNote } = this.props;
+    return (
+      <div className={noteStyle}>
+        <h3>{note.title}</h3>
+        <p>{note.text}</p>
+        <button
+          className={deleteButton}
+          onClick={() => {
+            deleteNote(note.id);
+          }}
+          type="button"
+        >
+          <span>Delete</span>
+        </button>
+        <button className={editButton} onClick={this.handleEditNote} type="button">
+          <span>Edit</span>
+        </button>
+      </div>
+    );
+  }
+}
 
 Note.propTypes = {
   note: shape({
@@ -126,7 +129,7 @@ Note.propTypes = {
     text: string,
   }).isRequired,
   deleteNote: func.isRequired,
-  editNote: func.isRequired,
+  showEditModal: func.isRequired,
 };
 
 export { Note, noteStyle };

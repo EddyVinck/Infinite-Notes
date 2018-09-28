@@ -127,7 +127,7 @@ const newNoteWrapper = css`
   }
 `;
 
-class AddNoteForm extends Component {
+class NoteForm extends Component {
   state = {
     newNote: {
       categoryID: '',
@@ -136,6 +136,22 @@ class AddNoteForm extends Component {
       text: '',
     },
   };
+
+  componentDidMount() {
+    const { noteToEdit } = this.props;
+
+    if (noteToEdit && noteToEdit.id !== -1) {
+      this.setState({
+        newNote: {
+          id: noteToEdit.id,
+          title: noteToEdit.title,
+          text: noteToEdit.text,
+        },
+      });
+    } else {
+      console.log('no note to edit'); // eslint-disable-line
+    }
+  }
 
   handleInputChange = (event) => {
     const { target } = event;
@@ -174,15 +190,26 @@ class AddNoteForm extends Component {
     this.categorySelect = element;
   };
 
+  handleEditNote = () => {
+    const { newNote } = this.state; // the newly edited note
+    const { editNote, hideModal } = this.props;
+
+    if (newNote && newNote.id !== -1) {
+      editNote(newNote.id, newNote.title, newNote.text);
+    }
+    hideModal();
+  };
+
   render() {
     const { newNote } = this.state;
-    const { availableCategories, handleHide } = this.props;
+    const { availableCategories, handleHide, noteToEdit } = this.props;
+
     return (
       <div className={newNoteWrapper}>
         <button type="button" className={closeButton} close-modal="" onClick={handleHide}>
           X
         </button>
-        <h2>Add a note</h2>
+        <h2>{noteToEdit === null ? 'Add a' : 'Edit your'} note</h2>
 
         <form className={newNoteFormStyle} onSubmit={this.handleSubmit} action="">
           <label htmlFor="category">
@@ -216,17 +243,31 @@ class AddNoteForm extends Component {
               autoComplete="off"
             />
           </div>
-
-          <button className={largeButton} type="submit">
-            <span>Submit</span>
-          </button>
+          {noteToEdit === null ? (
+            <button className={largeButton} type="submit">
+              <span>Submit</span>
+            </button>
+          ) : (
+            <button className={largeButton} onClick={this.handleEditNote} type="button">
+              <span>Edit note</span>
+            </button>
+          )}
         </form>
       </div>
     );
   }
 }
 
-AddNoteForm.propTypes = {
+NoteForm.defaultProps = {
+  // noteID: -1,
+  noteToEdit: {
+    id: -1,
+    title: '',
+    text: '',
+  },
+};
+
+NoteForm.propTypes = {
   availableCategories: arrayOf(
     shape({
       categoryID: number,
@@ -236,6 +277,13 @@ AddNoteForm.propTypes = {
   addNote: func.isRequired,
   handleHide: func.isRequired,
   hideModal: func.isRequired,
+  editNote: func.isRequired,
+  noteToEdit: shape({
+    id: number.isRequired,
+    title: string,
+    text: string,
+  }),
+  // noteID: number,
 };
 
-export default AddNoteForm;
+export default NoteForm;

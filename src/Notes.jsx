@@ -3,7 +3,7 @@ import { func } from 'prop-types';
 import styled, { css, keyframes } from 'react-emotion';
 import { Note, noteStyle } from './Note';
 import Categories from './Categories';
-import AddNoteForm from './AddNoteForm';
+import NoteForm from './NoteForm';
 import category from './types';
 import Modal from './Modal';
 import { contentWrapper, sectionPadding } from './css/layout';
@@ -81,11 +81,13 @@ const modalWrapper = css`
 
 class Notes extends Component {
   state = {
-    showModal: false,
+    isShowingModal: false,
+    noteToEdit: null,
   };
 
-  handleShow = () => {
-    this.setState({ showModal: true });
+  /* pass the current note to the modal for note editing */
+  handleShowModal = () => {
+    this.setState({ isShowingModal: true });
   };
 
   handleHide = (event) => {
@@ -98,7 +100,18 @@ class Notes extends Component {
   };
 
   hideModal = () => {
-    this.setState({ showModal: false });
+    this.setState({ isShowingModal: false });
+  };
+
+  showEditModal = (noteToEdit) => {
+    this.setState(
+      {
+        noteToEdit,
+      },
+      () => {
+        this.handleShowModal();
+      }
+    );
   };
 
   render() {
@@ -113,6 +126,8 @@ class Notes extends Component {
       editNote,
       getCategories,
     } = this.props;
+    const { isShowingModal, noteToEdit } = this.state;
+
     const availableCategories = [
       {
         categoryID: notes.categoryID,
@@ -124,9 +139,7 @@ class Notes extends Component {
       })),
     ];
 
-    const { showModal } = this.state;
-
-    const modal = showModal ? (
+    const modal = isShowingModal ? (
       <Modal>
         <div
           role="button"
@@ -136,11 +149,13 @@ class Notes extends Component {
           onKeyPress={this.handleHide}
           onClick={this.handleHide}
         >
-          <AddNoteForm
+          <NoteForm
             availableCategories={availableCategories}
             addNote={addNote}
             handleHide={this.handleHide}
             hideModal={this.hideModal}
+            editNote={editNote}
+            noteToEdit={noteToEdit}
           />
         </div>
       </Modal>
@@ -160,13 +175,18 @@ class Notes extends Component {
           <h2>Notes for {notes.categoryName} category:</h2>
           <NotesWrapper>
             <div className={addNoteStyle}>
-              <button type="button" className={addNoteButton} onClick={this.handleShow}>
+              <button type="button" className={addNoteButton} onClick={this.handleShowModal}>
                 +
               </button>
               {modal}
             </div>
             {notes.notes.map((note) => (
-              <Note key={note.id} note={note} editNote={editNote} deleteNote={deleteNote} />
+              <Note
+                key={note.id}
+                note={note}
+                showEditModal={this.showEditModal}
+                deleteNote={deleteNote}
+              />
             ))}
           </NotesWrapper>
         </div>

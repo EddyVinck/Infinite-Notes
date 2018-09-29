@@ -105,7 +105,7 @@ class App extends Component {
     this.setState((prevState) => {
       const newNotes = _.cloneDeep(prevState.allNotes);
       const modifiedNotesCategory = this.findCategory(newNote.categoryID, newNotes);
-      modifiedNotesCategory.notes.push(pushedNote);
+      modifiedNotesCategory.notes.unshift(pushedNote);
 
       return { allNotes: newNotes, selectedCategory: modifiedNotesCategory };
     });

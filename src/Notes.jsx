@@ -62,6 +62,7 @@ const addNoteStyle = css`
 `;
 
 const modalWrapper = css`
+  label: modal-wrapper;
   background-color: rgba(1, 5, 25, 0.5);
   position: fixed;
   height: 100%;
@@ -71,11 +72,9 @@ const modalWrapper = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  label: modal-wrapper;
   border: 0;
   outline: 0;
   opacity: 0;
-
   animation: ${fadeIn} 0.2s forwards;
 `;
 

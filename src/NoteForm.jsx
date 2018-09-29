@@ -149,7 +149,7 @@ class NoteForm extends Component {
         },
       });
     } else {
-      console.log('no note to edit'); // eslint-disable-line
+      console.log('no note to edit'); // eslint-disable-line no-console
     }
   }
 
@@ -192,11 +192,13 @@ class NoteForm extends Component {
 
   handleEditNote = () => {
     const { newNote } = this.state; // the newly edited note
-    const { editNote, hideModal } = this.props;
+    const { editNote, hideModal, resetNoteToEdit } = this.props;
 
     if (newNote && newNote.id !== -1) {
       editNote(newNote.id, newNote.title, newNote.text);
     }
+
+    resetNoteToEdit();
     hideModal();
   };
 
@@ -259,7 +261,6 @@ class NoteForm extends Component {
 }
 
 NoteForm.defaultProps = {
-  // noteID: -1,
   noteToEdit: {
     id: -1,
     title: '',
@@ -283,7 +284,7 @@ NoteForm.propTypes = {
     title: string,
     text: string,
   }),
-  // noteID: number,
+  resetNoteToEdit: func.isRequired,
 };
 
 export default NoteForm;

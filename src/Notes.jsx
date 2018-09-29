@@ -85,7 +85,6 @@ class Notes extends Component {
     noteToEdit: null,
   };
 
-  /* pass the current note to the modal for note editing */
   handleShowModal = () => {
     this.setState({ isShowingModal: true });
   };
@@ -95,6 +94,7 @@ class Notes extends Component {
       event &&
       (event.target.hasAttribute('modal-wrapper') || event.target.hasAttribute('close-modal'))
     ) {
+      this.resetNoteToEdit();
       this.hideModal();
     }
   };
@@ -112,6 +112,12 @@ class Notes extends Component {
         this.handleShowModal();
       }
     );
+  };
+
+  resetNoteToEdit = () => {
+    this.setState({
+      noteToEdit: null,
+    });
   };
 
   render() {
@@ -156,6 +162,7 @@ class Notes extends Component {
             hideModal={this.hideModal}
             editNote={editNote}
             noteToEdit={noteToEdit}
+            resetNoteToEdit={this.resetNoteToEdit}
           />
         </div>
       </Modal>

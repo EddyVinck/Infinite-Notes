@@ -44,15 +44,7 @@ const config = {
       },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Infinite Notes',
-      filename: 'index.html',
-      template: './index.html',
-      inject: false,
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 };
 
 module.exports = config;

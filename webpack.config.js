@@ -16,6 +16,7 @@ const config = {
     publicPath: '/public/',
     port: 3000,
     bonjour: true,
+    openPage: 'public/',
   },
   watchOptions: {
     aggregateTimeout: 300,
@@ -44,7 +45,14 @@ const config = {
       },
     ],
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: './template.html',
+      inject: true,
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 };
 
 module.exports = config;

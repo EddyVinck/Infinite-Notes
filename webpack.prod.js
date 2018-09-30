@@ -7,7 +7,6 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
-    publicPath: '/public/',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -33,10 +32,8 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Infinite Notes',
       filename: 'index.html',
-      template: './index.html',
-      inject: false,
+      template: './template.html',
     }),
     new UglifyJsPlugin(),
   ],

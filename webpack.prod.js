@@ -36,6 +36,7 @@ const config = {
       title: 'Infinite Notes',
       filename: 'index.html',
       template: './index.html',
+      inject: false,
     }),
     new UglifyJsPlugin(),
   ],

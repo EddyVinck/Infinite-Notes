@@ -3,6 +3,7 @@ import { shape, arrayOf, func, string, number } from 'prop-types';
 import { css } from 'react-emotion';
 import { buttonStyle, buttonGradient } from './css/button';
 import formStyle from './css/form';
+import breakpoints from './css/breakpoints';
 
 const largeButton = css`
   ${buttonStyle};
@@ -119,6 +120,17 @@ const newNoteWrapper = css`
   position: relative;
   background-color: #fff;
   padding: 30px 30px;
+  overflow: auto;
+
+  ${breakpoints.mobileDown} {
+    max-width: 100%;
+    max-height: 100%;
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+  }
 
   input,
   textarea {

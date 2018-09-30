@@ -37,6 +37,9 @@ const config = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: '/node_modules/',
+        options: {
+          plugins: ['react-hot-loader/babel'],
+        },
       },
       {
         test: /\.jsx?$/,

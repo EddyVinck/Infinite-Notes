@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line
@@ -36,6 +37,9 @@ const config = {
       template: './template.html',
     }),
     new UglifyJsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
   ],
 };
 

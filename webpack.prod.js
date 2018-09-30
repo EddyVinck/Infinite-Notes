@@ -1,5 +1,5 @@
-const webpack = require('webpack');
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const config = {
   entry: ['./src/clientApp.jsx'],
@@ -7,19 +7,6 @@ const config = {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
     publicPath: '/public/',
-  },
-  devtool: 'cheap-eval-source-map',
-  devServer: {
-    hot: true,
-    inline: true,
-    publicPath: '/public/',
-    port: 3000,
-    bonjour: true,
-  },
-  watchOptions: {
-    aggregateTimeout: 300,
-    poll: 1000,
-    ignored: /node_modules/,
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -43,7 +30,7 @@ const config = {
       },
     ],
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [new UglifyJsPlugin()],
 };
 
 module.exports = config;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled, { injectGlobal } from 'react-emotion';
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import Notes from './Notes';
 import notes from './notes-data';
 import globalStyles from './css/globalStyles';
@@ -103,7 +103,7 @@ class App extends Component {
     const pushedNote = { id: newNoteID, title: newNote.title, text: newNote.text };
 
     this.setState((prevState) => {
-      const newNotes = _.cloneDeep(prevState.allNotes);
+      const newNotes = cloneDeep(prevState.allNotes);
       const modifiedNotesCategory = this.findCategory(newNote.categoryID, newNotes);
       modifiedNotesCategory.notes.unshift(pushedNote);
 
@@ -126,7 +126,7 @@ class App extends Component {
     };
 
     this.setState((prevState) => {
-      const notesCopy = _.cloneDeep(prevState.allNotes);
+      const notesCopy = cloneDeep(prevState.allNotes);
       const parentCategoryRef = this.findCategory(parentCategory.categoryID, notesCopy);
 
       parentCategoryRef.categories.push(newCategory);
@@ -137,7 +137,7 @@ class App extends Component {
 
   deleteNote = (noteID) => {
     this.setState((prevState) => {
-      const notesCopy = _.cloneDeep(prevState.allNotes);
+      const notesCopy = cloneDeep(prevState.allNotes);
       let parentCategory = null;
 
       if (prevState.selectedCategory !== null && prevState.selectedCategory.categoryID) {
@@ -154,7 +154,7 @@ class App extends Component {
 
   editNote = (noteID, title = 'Note title', text = 'Note text') => {
     this.setState((prevState) => {
-      const notesCopy = _.cloneDeep(prevState.allNotes);
+      const notesCopy = cloneDeep(prevState.allNotes);
       let parentCategory = null;
 
       if (prevState.selectedCategory !== null && prevState.selectedCategory.categoryID) {
@@ -176,7 +176,7 @@ class App extends Component {
 
   editNoteOld = (noteID) => {
     this.setState((prevState) => {
-      const notesCopy = _.cloneDeep(prevState.allNotes);
+      const notesCopy = cloneDeep(prevState.allNotes);
       let parentCategory = null;
 
       if (prevState.selectedCategory !== null && prevState.selectedCategory.categoryID) {

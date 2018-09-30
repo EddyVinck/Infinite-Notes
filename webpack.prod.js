@@ -1,5 +1,6 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line
 
 const config = {
   entry: ['./src/clientApp.jsx'],
@@ -30,7 +31,14 @@ const config = {
       },
     ],
   },
-  plugins: [new UglifyJsPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Infinite Notes',
+      filename: 'index.html',
+      template: './index.html',
+    }),
+    new UglifyJsPlugin(),
+  ],
 };
 
 module.exports = config;

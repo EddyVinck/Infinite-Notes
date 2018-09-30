@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-linex
 
 const config = {
   entry: ['./src/clientApp.jsx'],
@@ -43,7 +44,15 @@ const config = {
       },
     ],
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Infinite Notes',
+      filename: 'index.html',
+      template: './index.html',
+      inject: false,
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 };
 
 module.exports = config;
